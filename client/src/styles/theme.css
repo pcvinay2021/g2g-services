@@ -1,0 +1,141 @@
+:root{
+
+/* ===========================
+   G2G Enterprise Theme
+=========================== */
+
+--primary:#009999;
+--primary-dark:#006D70;
+--secondary:#003B49;
+--accent:#FF6B00;
+
+--white:#FFFFFF;
+--light:#F7FAFC;
+--gray:#64748B;
+--dark:#0F172A;
+
+--radius:18px;
+
+--shadow-sm:0 6px 20px rgba(0,0,0,.06);
+
+--shadow-md:0 12px 35px rgba(0,0,0,.10);
+
+--shadow-lg:0 20px 50px rgba(0,0,0,.15);
+
+--transition:.35s ease;
+
+--container:1350px;
+
+}
+
+.container{
+
+width:100%;
+
+max-width:var(--container);
+
+margin:auto;
+
+padding-inline:24px;
+
+}
+
+.section{
+
+padding:100px 0;
+
+}
+
+.section-title{
+
+text-align:center;
+
+margin-bottom:70px;
+
+}
+
+.section-title span{
+
+color:var(--primary);
+
+font-weight:600;
+
+letter-spacing:2px;
+
+text-transform:uppercase;
+
+}
+
+.section-title h2{
+
+font-size:46px;
+
+margin:18px 0;
+
+color:var(--secondary);
+
+}
+
+.section-title p{
+
+max-width:760px;
+
+margin:auto;
+
+line-height:30px;
+
+color:var(--gray);
+
+}
+
+.btn{
+
+padding:15px 32px;
+
+border-radius:50px;
+
+cursor:pointer;
+
+font-weight:600;
+
+transition:var(--transition);
+
+border:none;
+
+}
+
+.btn-primary{
+
+background:var(--primary);
+
+color:white;
+
+}
+
+.btn-primary:hover{
+
+background:var(--primary-dark);
+
+transform:translateY(-4px);
+
+}
+
+.card{
+
+background:white;
+
+border-radius:18px;
+
+box-shadow:var(--shadow-sm);
+
+transition:var(--transition);
+
+}
+
+.card:hover{
+
+transform:translateY(-10px);
+
+box-shadow:var(--shadow-lg);
+
+}

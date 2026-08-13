@@ -1,0 +1,245 @@
+/* =========================================
+   G2G NAVBAR
+========================================= */
+
+.g2g-navbar {
+  width: 100%;
+
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  z-index: 9999;
+
+  background: rgba(255, 255, 255, 0.97);
+
+  border-bottom: 1px solid #e4ecee;
+
+  box-shadow:
+    0 3px 18px rgba(6, 56, 70, 0.06);
+
+  transition:
+    transform 0.35s ease,
+    opacity 0.25s ease;
+}
+
+
+/* =========================================
+   SHOW / HIDE
+========================================= */
+
+.g2g-navbar-visible {
+  transform: translateY(0);
+
+  opacity: 1;
+}
+
+.g2g-navbar-hidden {
+  transform: translateY(-110%);
+
+  opacity: 0;
+}
+
+
+/* =========================================
+   CONTAINER
+========================================= */
+
+.g2g-navbar-container {
+  width: 90%;
+
+  max-width: 1200px;
+
+  height: 78px;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 25px;
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.g2g-navbar-logo {
+  height: 78px;
+
+  display: flex;
+
+  align-items: center;
+
+  flex-shrink: 0;
+}
+
+.g2g-navbar-logo img {
+  width: 140px;
+
+  height: 64px;
+
+  object-fit: contain;
+
+  display: block;
+}
+
+
+/* =========================================
+   MENU
+========================================= */
+
+.g2g-navbar-menu {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 25px;
+
+  margin-left: auto;
+}
+
+.g2g-navbar-menu a {
+  position: relative;
+
+  color: #304f58;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  transition:
+    color 0.2s ease;
+}
+
+.g2g-navbar-menu a:hover {
+  color: #00a99d;
+}
+
+
+/* =========================================
+   ACTIVE-LIKE UNDERLINE
+========================================= */
+
+.g2g-navbar-menu a::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -7px;
+
+  width: 0;
+
+  height: 2px;
+
+  background: #00a99d;
+
+  transition:
+    width 0.25s ease;
+}
+
+.g2g-navbar-menu a:hover::after {
+  width: 100%;
+}
+
+
+/* =========================================
+   CTA BUTTON
+========================================= */
+
+.g2g-navbar-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-width: 115px;
+
+  height: 40px;
+
+  padding: 0 17px;
+
+  background: #00a99d;
+
+  color: #ffffff;
+
+  border-radius: 4px;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  white-space: nowrap;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.g2g-navbar-button:hover {
+  background: #008f86;
+
+  transform: translateY(-1px);
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1050px) {
+
+  .g2g-navbar-menu {
+    gap: 17px;
+  }
+
+  .g2g-navbar-menu a {
+    font-size: 13px;
+  }
+
+  .g2g-navbar-logo img {
+    width: 130px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 800px) {
+
+ .g2g-navbar-container {
+  width: 90%;
+
+  max-width: 1200px;
+
+  height: 78px;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 25px;
+}
+}

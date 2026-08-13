@@ -1,0 +1,9 @@
+{
+  "name": "G2G Services",
+  "short_name": "G2G Services",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#052B35",
+  "description": "IT, networking, CCTV surveillance, access control and security technology solutions."
+}

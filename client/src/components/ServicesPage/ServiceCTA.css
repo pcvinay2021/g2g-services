@@ -1,0 +1,527 @@
+/*==========================================
+            SERVICE CTA
+==========================================*/
+
+.service-cta{
+
+    position:relative;
+
+    padding:120px 0;
+
+    background:linear-gradient(135deg,#06253C,#0A6A88);
+
+    overflow:hidden;
+
+}
+
+/* Background Circles */
+
+.service-cta::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:550px;
+
+    height:550px;
+
+    background:rgba(255,255,255,.05);
+
+    border-radius:50%;
+
+    top:-220px;
+
+    right:-180px;
+
+}
+
+.service-cta::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:420px;
+
+    height:420px;
+
+    background:rgba(255,255,255,.04);
+
+    border-radius:50%;
+
+    left:-150px;
+
+    bottom:-180px;
+
+}
+
+.cta-wrapper{
+
+    position:relative;
+
+    z-index:2;
+
+    display:grid;
+
+    grid-template-columns:2fr 1.2fr 1fr;
+
+    gap:45px;
+
+    align-items:center;
+
+}
+
+/*==========================================
+            LEFT SIDE
+==========================================*/
+
+.cta-left{
+
+    color:#fff;
+
+}
+
+.cta-tag{
+
+    display:inline-block;
+
+    padding:10px 22px;
+
+    background:rgba(255,255,255,.12);
+
+    border:1px solid rgba(255,255,255,.18);
+
+    border-radius:50px;
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+    font-weight:700;
+
+    margin-bottom:25px;
+
+}
+
+.cta-left h2{
+
+    font-size:64px;
+
+    line-height:1.15;
+
+    font-weight:800;
+
+    margin-bottom:25px;
+
+}
+
+.cta-left h2 span{
+
+    color:#FFD166;
+
+}
+
+.cta-left p{
+
+    font-size:18px;
+
+    line-height:34px;
+
+    color:#E7F5F6;
+
+    max-width:650px;
+
+    margin-bottom:40px;
+
+}
+
+/*==========================================
+            STATS
+==========================================*/
+
+.cta-stats{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:18px;
+
+}
+
+.stat-card{
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:18px;
+
+    padding:25px;
+
+    transition:.35s;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-8px);
+
+    background:rgba(255,255,255,.14);
+
+}
+
+.stat-card h3{
+
+    color:#FFD166;
+
+    font-size:38px;
+
+    margin-bottom:10px;
+
+}
+
+.stat-card span{
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:600;
+
+}/*==========================================
+            CENTER FEATURES
+==========================================*/
+
+.cta-center{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+.feature-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    padding:18px 20px;
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(15px);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:18px;
+
+    color:#fff;
+
+    transition:.35s;
+
+}
+
+.feature-item svg{
+
+    color:#FFD166;
+
+    font-size:24px;
+
+    min-width:24px;
+
+}
+
+.feature-item span{
+
+    font-size:17px;
+
+    font-weight:600;
+
+}
+
+.feature-item:hover{
+
+    transform:translateX(12px);
+
+    background:rgba(255,255,255,.15);
+
+}
+
+/*==========================================
+            RIGHT SIDE
+==========================================*/
+
+.cta-right{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:25px;
+
+}
+
+.call-card,
+.consult-card{
+
+    background:rgba(255,255,255,.10);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.15);
+
+    border-radius:22px;
+
+    padding:30px;
+
+    color:#fff;
+
+    transition:.35s;
+
+}
+
+.call-card:hover,
+.consult-card:hover{
+
+    transform:translateY(-8px);
+
+    background:rgba(255,255,255,.16);
+
+}
+
+.call-card small,
+.consult-card small{
+
+    display:block;
+
+    color:#FFD166;
+
+    font-size:13px;
+
+    margin-bottom:10px;
+
+    letter-spacing:1px;
+
+}
+
+.call-card h3,
+.consult-card h3{
+
+    font-size:26px;
+
+    margin-bottom:20px;
+
+    line-height:1.4;
+
+}
+
+.call-btn,
+.consult-btn{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:16px;
+
+    border-radius:50px;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    font-size:16px;
+
+    transition:.35s;
+
+}
+
+.call-btn{
+
+    background:#FFD166;
+
+    color:#052B35;
+
+}
+
+.call-btn:hover{
+
+    background:#FFB703;
+
+    transform:translateY(-3px);
+
+}
+
+.consult-btn{
+
+    border:none;
+
+    background:#00C4B3;
+
+    color:#fff;
+
+    cursor:pointer;
+
+}
+
+.consult-btn:hover{
+
+    background:#008E83;
+
+    transform:translateY(-3px);
+
+}
+
+/*==========================================
+            RESPONSIVE
+==========================================*/
+
+@media(max-width:1200px){
+
+.cta-wrapper{
+
+grid-template-columns:1fr;
+
+gap:40px;
+
+}
+
+.cta-left{
+
+text-align:center;
+
+}
+
+.cta-left p{
+
+margin:auto auto 40px;
+
+}
+
+.cta-center{
+
+max-width:650px;
+
+margin:auto;
+
+}
+
+.cta-right{
+
+max-width:450px;
+
+margin:auto;
+
+width:100%;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.service-cta{
+
+padding:80px 0;
+
+}
+
+.cta-left h2{
+
+font-size:40px;
+
+}
+
+.cta-left p{
+
+font-size:16px;
+
+line-height:28px;
+
+}
+
+.cta-stats{
+
+grid-template-columns:1fr 1fr;
+
+}
+
+.stat-card{
+
+padding:20px;
+
+}
+
+.stat-card h3{
+
+font-size:28px;
+
+}
+
+.feature-item{
+
+padding:16px;
+
+}
+
+.call-card,
+.consult-card{
+
+padding:22px;
+
+}
+
+.call-card h3,
+.consult-card h3{
+
+font-size:22px;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.cta-left h2{
+
+font-size:32px;
+
+}
+
+.cta-stats{
+
+grid-template-columns:1fr;
+
+}
+
+.call-btn,
+.consult-btn{
+
+font-size:15px;
+
+padding:15px;
+
+}
+
+.feature-item{
+
+flex-direction:row;
+
+}
+
+}

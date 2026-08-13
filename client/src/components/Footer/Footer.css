@@ -1,0 +1,491 @@
+/* =========================================================
+   G2G SERVICES - GLOBAL FOOTER
+   ========================================================= */
+
+.g2g-footer {
+  width: 100%;
+  background: #052b35;
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   MAIN FOOTER
+   ========================================================= */
+
+.footer-main {
+  padding: 65px 0 55px;
+}
+
+.footer-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   MAIN FOUR SECTIONS
+   ========================================================= */
+
+.footer-grid {
+  display: grid;
+
+  /*
+    Brand | Quick Links | Services | Get In Touch
+  */
+
+  grid-template-columns:
+    1.45fr
+    1.15fr
+    1.15fr
+    1.10fr;
+
+  column-gap: 55px;
+  align-items: start;
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.footer-brand {
+  min-width: 0;
+}
+
+.footer-logo {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.footer-logo img {
+  width: 205px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.footer-brand p {
+  max-width: 315px;
+  margin: 0;
+
+  color: #a9c0c5;
+
+  font-size: 13px;
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   SOCIAL ICONS
+   ========================================================= */
+
+.footer-social {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-top: 23px;
+}
+
+.footer-social a {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.07);
+  color: #b9ced2;
+
+  border-radius: 4px;
+
+  text-decoration: none;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.footer-social a:hover {
+  background: #00c4b3;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   QUICK LINKS / SERVICES HEADINGS
+   ========================================================= */
+
+.footer-column {
+  min-width: 0;
+}
+
+.footer-column h3,
+.footer-contact h3 {
+  margin: 4px 0 22px;
+
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  line-height: 1.3;
+}
+
+
+/* =========================================================
+   TWO COLUMN LINKS
+   ========================================================= */
+
+.footer-link-columns {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  /*
+    Space between 1st and 2nd link column
+  */
+  column-gap: 30px;
+
+  align-items: start;
+}
+
+.footer-link-columns > div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 11px;
+}
+
+.footer-link-columns a {
+  color: #a9c0c5;
+
+  text-decoration: none;
+
+  font-size: 13px;
+  line-height: 1.45;
+
+  white-space: nowrap;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.footer-link-columns a:hover {
+  color: #00c4b3;
+  transform: translateX(3px);
+}
+
+
+/* =========================================================
+   GET IN TOUCH
+   ========================================================= */
+
+.footer-contact {
+  min-width: 0;
+
+  /*
+    Extra breathing room so it does not
+    look attached to Services
+  */
+  padding-left: 15px;
+}
+
+.footer-contact a {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 11px;
+
+  margin-bottom: 15px;
+
+  color: #a9c0c5;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+
+  transition: color 0.2s ease;
+}
+
+.footer-contact a svg {
+  flex-shrink: 0;
+
+  margin-top: 3px;
+
+  color: #00c4b3;
+
+  font-size: 13px;
+}
+
+.footer-contact a:hover {
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   BOTTOM BAR
+   ========================================================= */
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.footer-bottom-inner {
+  min-height: 65px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+}
+
+.footer-bottom span {
+  color: #829da3;
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.footer-bottom-inner > div {
+  display: flex;
+  align-items: center;
+
+  gap: 25px;
+}
+
+.footer-bottom a {
+  color: #829da3;
+
+  text-decoration: none;
+
+  font-size: 11px;
+
+  transition: color 0.2s ease;
+}
+
+.footer-bottom a:hover {
+  color: #00c4b3;
+}
+
+
+/* =========================================================
+   FLOATING WHATSAPP
+   ========================================================= */
+
+.footer-whatsapp {
+  position: fixed;
+
+  right: 22px;
+  bottom: 22px;
+
+  width: 52px;
+  height: 52px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #18b95b;
+  color: #ffffff;
+
+  border-radius: 50%;
+
+  text-decoration: none;
+
+  font-size: 25px;
+
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.22);
+
+  z-index: 999;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.footer-whatsapp:hover {
+  transform: scale(1.08);
+
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.28);
+}
+
+
+/* =========================================================
+   LARGE TABLET
+   ========================================================= */
+
+@media (max-width: 1050px) {
+
+  .footer-grid {
+    grid-template-columns:
+      1.3fr
+      1fr
+      1fr
+      1fr;
+
+    column-gap: 35px;
+  }
+
+  .footer-contact {
+    padding-left: 5px;
+  }
+
+  .footer-link-columns {
+    column-gap: 20px;
+  }
+
+  .footer-link-columns a {
+    font-size: 12px;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+  .footer-main {
+    padding: 55px 0 45px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 50px;
+    row-gap: 45px;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .footer-brand p {
+    max-width: 500px;
+  }
+
+  .footer-contact {
+    padding-left: 0;
+  }
+
+  .footer-bottom-inner {
+    min-height: auto;
+
+    padding: 18px 0;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 12px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  .footer-main {
+    padding: 48px 0 35px;
+  }
+
+  .footer-container {
+    width: 88%;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+
+    gap: 35px;
+  }
+
+  .footer-brand {
+    grid-column: auto;
+  }
+
+  .footer-logo img {
+    width: 175px;
+  }
+
+  .footer-brand p {
+    max-width: 100%;
+  }
+
+  .footer-link-columns {
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 25px;
+  }
+
+  .footer-link-columns a {
+    font-size: 12px;
+  }
+
+  .footer-contact {
+    padding-left: 0;
+  }
+
+  .footer-bottom-inner {
+    align-items: flex-start;
+
+    padding: 18px 0;
+  }
+
+  .footer-bottom-inner > div {
+    gap: 15px;
+
+    flex-wrap: wrap;
+  }
+
+  .footer-whatsapp {
+    right: 16px;
+    bottom: 16px;
+
+    width: 48px;
+    height: 48px;
+
+    font-size: 23px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+  .footer-link-columns {
+    column-gap: 18px;
+  }
+
+  .footer-link-columns a {
+    font-size: 11px;
+  }
+
+  .footer-logo img {
+    width: 165px;
+  }
+
+}

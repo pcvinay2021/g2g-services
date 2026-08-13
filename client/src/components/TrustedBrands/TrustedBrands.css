@@ -1,0 +1,160 @@
+/* =========================================
+   G2G TRUSTED BRANDS
+========================================= */
+
+.g2g-trusted-brands {
+  padding: 75px 0;
+
+  background: #ffffff;
+
+  border-top: 1px solid #e1eaec;
+  border-bottom: 1px solid #e1eaec;
+}
+
+.g2g-brands-container {
+  width: 90%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.g2g-brands-heading {
+  text-align: center;
+
+  max-width: 650px;
+
+  margin: 0 auto 45px;
+}
+
+.g2g-brands-heading h2 {
+  margin: 0;
+
+  color: #062f3d;
+
+  font-size: clamp(32px, 4vw, 44px);
+
+  line-height: 1.1;
+
+  letter-spacing: -1px;
+}
+
+.g2g-brands-heading h2 span {
+  color: #00a99d;
+}
+
+.g2g-brands-heading p {
+  max-width: 550px;
+
+  margin: 18px auto 0;
+
+  color: #718187;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+
+/* =========================================
+   BRANDS
+========================================= */
+
+.g2g-brands-list {
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  border-top: 1px solid #dce7e9;
+  border-left: 1px solid #dce7e9;
+}
+
+.g2g-brand-item {
+  min-height: 85px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  border-right: 1px solid #dce7e9;
+  border-bottom: 1px solid #dce7e9;
+
+  color: #62767c;
+
+  font-size: 15px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.8px;
+
+  background: #fafcfc;
+
+  transition:
+    color 0.25s ease,
+    background 0.25s ease;
+}
+
+.g2g-brand-item:hover {
+  color: #00a99d;
+
+  background: #f1f9f8;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 800px) {
+
+  .g2g-trusted-brands {
+    padding: 65px 0;
+  }
+
+  .g2g-brands-list {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 500px) {
+
+  .g2g-trusted-brands {
+    padding: 55px 0;
+  }
+
+  .g2g-brands-container {
+    width: 92%;
+  }
+
+  .g2g-brands-heading h2 {
+    font-size: 32px;
+  }
+
+  .g2g-brands-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .g2g-brand-item {
+    min-height: 70px;
+
+    padding: 15px;
+
+    font-size: 12px;
+  }
+
+}

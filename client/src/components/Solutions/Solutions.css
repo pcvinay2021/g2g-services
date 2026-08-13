@@ -1,0 +1,218 @@
+/* =========================================
+   G2G SOLUTIONS
+========================================= */
+
+.g2g-solutions {
+  background: #ffffff;
+  padding: 80px 0;
+}
+
+.g2g-solutions-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.g2g-solutions-heading {
+  display: grid;
+
+  grid-template-columns: 1fr 0.8fr;
+
+  gap: 80px;
+
+  align-items: end;
+
+  margin-bottom: 50px;
+}
+
+.g2g-section-label {
+  display: inline-block;
+
+  margin-bottom: 14px;
+
+  color: #00a99d;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.8px;
+}
+
+.g2g-solutions-heading h2 {
+  margin: 0;
+
+  color: #062f3d;
+
+  font-size: clamp(34px, 4vw, 48px);
+
+  line-height: 1.1;
+
+  letter-spacing: -1px;
+}
+
+.g2g-solutions-heading h2 span {
+  color: #00a99d;
+}
+
+.g2g-solutions-intro {
+  max-width: 430px;
+}
+
+.g2g-solutions-intro p {
+  margin: 0 0 18px;
+
+  color: #63757b;
+
+  font-size: 14px;
+
+  line-height: 1.75;
+}
+
+.g2g-solutions-link {
+  color: #063846;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  transition: color 0.2s ease;
+}
+
+.g2g-solutions-link:hover {
+  color: #00a99d;
+}
+
+
+/* =========================================
+   GRID
+========================================= */
+
+.g2g-solutions-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  border-top: 1px solid #dce7e9;
+  border-left: 1px solid #dce7e9;
+}
+
+.g2g-solution-item {
+  display: grid;
+
+  grid-template-columns: 48px 1fr;
+
+  gap: 18px;
+
+  padding: 30px 28px;
+
+  border-right: 1px solid #dce7e9;
+  border-bottom: 1px solid #dce7e9;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.g2g-solution-item:hover {
+  background: #f5fafb;
+}
+
+.g2g-solution-icon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #e8f7f6;
+
+  color: #00a99d;
+
+  font-size: 17px;
+
+  border-radius: 4px;
+}
+
+.g2g-solution-item h3 {
+  margin: 1px 0 8px;
+
+  color: #073846;
+
+  font-size: 16px;
+
+  font-weight: 800;
+}
+
+.g2g-solution-item p {
+  margin: 0;
+
+  color: #718187;
+
+  font-size: 12px;
+
+  line-height: 1.65;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 850px) {
+
+  .g2g-solutions {
+    padding: 65px 0;
+  }
+
+  .g2g-solutions-heading {
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+  }
+
+  .g2g-solutions-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 560px) {
+
+  .g2g-solutions {
+    padding: 55px 0;
+  }
+
+  .g2g-solutions-container {
+    width: 92%;
+  }
+
+  .g2g-solutions-heading h2 {
+    font-size: 34px;
+  }
+
+  .g2g-solutions-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .g2g-solution-item {
+    padding: 24px 20px;
+  }
+
+}

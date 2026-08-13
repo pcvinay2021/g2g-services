@@ -1,0 +1,352 @@
+/* =========================================
+   G2G FEATURED PROJECTS
+========================================= */
+
+.g2g-featured-projects {
+  padding: 85px 0;
+
+  background: #f5f9fa;
+}
+
+.g2g-projects-container {
+  width: 90%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.g2g-projects-heading {
+  display: grid;
+
+  grid-template-columns: 1fr 0.8fr;
+
+  gap: 80px;
+
+  align-items: end;
+
+  margin-bottom: 45px;
+}
+
+.g2g-projects-heading h2 {
+  margin: 0;
+
+  color: #062f3d;
+
+  font-size: clamp(34px, 4vw, 48px);
+
+  line-height: 1.1;
+
+  letter-spacing: -1px;
+}
+
+.g2g-projects-heading h2 span {
+  color: #00a99d;
+}
+
+.g2g-projects-intro {
+  max-width: 420px;
+}
+
+.g2g-projects-intro p {
+  margin: 0 0 18px;
+
+  color: #687a80;
+
+  font-size: 14px;
+
+  line-height: 1.75;
+}
+
+.g2g-projects-link {
+  color: #063846;
+
+  text-decoration: none;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  transition: color 0.2s ease;
+}
+
+.g2g-projects-link:hover {
+  color: #00a99d;
+}
+
+
+/* =========================================
+   PROJECT LIST
+========================================= */
+
+.g2g-projects-list {
+  border-top: 1px solid #d5e3e5;
+}
+
+
+/* =========================================
+   PROJECT ROW
+========================================= */
+
+.g2g-project-row {
+  display: grid;
+
+  grid-template-columns:
+    55px
+    55px
+    1fr
+    35px;
+
+  align-items: center;
+
+  gap: 20px;
+
+  padding: 30px 5px;
+
+  border-bottom: 1px solid #d5e3e5;
+
+  transition:
+    background 0.25s ease,
+    padding 0.25s ease;
+}
+
+.g2g-project-row:hover {
+  background: #ffffff;
+
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+
+/* =========================================
+   NUMBER
+========================================= */
+
+.g2g-project-number {
+  color: #9aadb1;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 1px;
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.g2g-project-icon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #e7f7f5;
+
+  color: #00a99d;
+
+  border-radius: 4px;
+
+  font-size: 17px;
+}
+
+
+/* =========================================
+   CONTENT
+========================================= */
+
+.g2g-project-content span {
+  color: #00a99d;
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.4px;
+}
+
+.g2g-project-content h3 {
+  margin: 7px 0;
+
+  color: #073846;
+
+  font-size: 19px;
+
+  font-weight: 800;
+}
+
+.g2g-project-content p {
+  max-width: 650px;
+
+  margin: 0;
+
+  color: #718187;
+
+  font-size: 12px;
+
+  line-height: 1.65;
+}
+
+
+/* =========================================
+   ARROW
+========================================= */
+
+.g2g-project-arrow {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  border: 1px solid #cbdcdf;
+
+  border-radius: 50%;
+
+  color: #063846;
+
+  text-decoration: none;
+
+  transition: all 0.25s ease;
+}
+
+.g2g-project-row:hover
+.g2g-project-arrow {
+  background: #00a99d;
+
+  border-color: #00a99d;
+
+  color: #ffffff;
+}
+
+
+/* =========================================
+   CTA
+========================================= */
+
+.g2g-projects-cta {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  margin-top: 30px;
+
+  padding: 23px 25px;
+
+  background: #062f3d;
+}
+
+.g2g-projects-cta div {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.g2g-projects-cta strong {
+  color: #ffffff;
+
+  font-size: 14px;
+}
+
+.g2g-projects-cta span {
+  color: #9eb5ba;
+
+  font-size: 12px;
+}
+
+.g2g-projects-cta a {
+  flex-shrink: 0;
+
+  color: #00c4b3;
+
+  text-decoration: none;
+
+  font-size: 12px;
+
+  font-weight: 800;
+}
+
+.g2g-projects-cta a:hover {
+  color: #ffffff;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 850px) {
+
+  .g2g-featured-projects {
+    padding: 65px 0;
+  }
+
+  .g2g-projects-heading {
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+  .g2g-featured-projects {
+    padding: 55px 0;
+  }
+
+  .g2g-projects-container {
+    width: 92%;
+  }
+
+  .g2g-projects-heading h2 {
+    font-size: 34px;
+  }
+
+  .g2g-project-row {
+    grid-template-columns:
+      35px
+      45px
+      1fr;
+
+    gap: 12px;
+
+    padding: 25px 0;
+  }
+
+  .g2g-project-arrow {
+    display: none;
+  }
+
+  .g2g-project-content h3 {
+    font-size: 16px;
+  }
+
+  .g2g-projects-cta {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+}

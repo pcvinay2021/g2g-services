@@ -1,0 +1,161 @@
+/*==========================================
+        INDUSTRIES
+==========================================*/
+
+.industries{
+
+    padding:100px 0;
+
+    background:#ffffff;
+
+}
+
+.industry-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:30px;
+
+    margin-top:60px;
+
+}
+
+.industry-card{
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:40px 25px;
+
+    text-align:center;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
+
+    transition:.35s;
+
+    border:2px solid transparent;
+
+}
+
+.industry-card:hover{
+
+    transform:translateY(-10px);
+
+    border-color:#00C4B3;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.15);
+
+}
+
+.industry-icon{
+
+    width:90px;
+
+    height:90px;
+
+    margin:auto;
+
+    margin-bottom:25px;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#00C4B3,#0B6A88);
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:36px;
+
+    transition:.35s;
+
+}
+
+.industry-card:hover .industry-icon{
+
+    transform:rotate(10deg) scale(1.08);
+
+}
+
+.industry-card h3{
+
+    font-size:22px;
+
+    color:#0B2C4D;
+
+    margin-bottom:15px;
+
+}
+
+.industry-card p{
+
+    color:#666;
+
+    line-height:28px;
+
+    font-size:16px;
+
+}
+
+/*==========================================
+        RESPONSIVE
+==========================================*/
+
+@media(max-width:1200px){
+
+.industry-grid{
+
+grid-template-columns:repeat(3,1fr);
+
+}
+
+}
+
+@media(max-width:992px){
+
+.industry-grid{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:768px){
+
+.industries{
+
+padding:70px 0;
+
+}
+
+.industry-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.industry-card{
+
+padding:35px 20px;
+
+}
+
+.industry-icon{
+
+width:80px;
+
+height:80px;
+
+font-size:30px;
+
+}
+
+}

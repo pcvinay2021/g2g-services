@@ -1,0 +1,48 @@
+services:
+  - type: web
+    runtime: node
+    name: g2g-services-api
+    rootDir: server
+    region: singapore
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        sync: false
+      - key: ADMIN_EMAIL
+        value: admin@g2gservices.in
+      - key: ADMIN_NAME
+        value: G2G Administrator
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+    initialDeployHook: node src/createAdmin.js
+
+  - type: web
+    runtime: static
+    name: g2g-services-web
+    rootDir: client
+    buildCommand: npm install && npm run build
+    staticPublishPath: client/dist
+    autoDeployTrigger: commit
+    envVars:
+      - key: VITE_API_URL
+        sync: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html

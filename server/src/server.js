@@ -37,7 +37,22 @@ app.use(
     path.join(__dirname, "uploads")
   )
 );
+// Root route
+app.get("/", (req, res) => {
+  res.json({
+    success: true,
+    message: "G2G Services Backend API is running 🚀",
+    status: "LIVE",
+  });
+});
 
+// Health check
+app.get("/api/health", (req, res) => {
+  res.json({
+    success: true,
+    message: "G2G Services Backend API is running",
+  });
+});
 // Health check
 app.get("/api/health", (req, res) => {
   res.json({

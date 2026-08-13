@@ -1,12 +1,26 @@
 const mongoose = require("mongoose");
+const dns = require("dns");
+
+// Use reliable public DNS servers for MongoDB Atlas SRV lookup
+dns.setServers([
+  "8.8.8.8",
+  "1.1.1.1",
+]);
+
+// Prefer IPv4
+if (dns.setDefaultResultOrder) {
+  dns.setDefaultResultOrder("ipv4first");
+}
 
 const connectDB = async () => {
   try {
-    const conn = await mongoose.connect(process.env.MONGO_URI);
+    const conn = await mongoose.connect(process.env.MONGO_URI, {
+      serverSelectionTimeoutMS: 15000,
+    });
 
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.error(`MongoDB Connection Error: ${error.message}`);
+    console.error("MongoDB Connection Error:", error.message);
     process.exit(1);
   }
 };

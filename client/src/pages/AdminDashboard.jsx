@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   FaBars,
+  FaPalette,
   FaBriefcase,
   FaEnvelope,
   FaSignOutAlt,
@@ -210,6 +211,13 @@ function AdminDashboard() {
                 <FaBriefcase />
                 Career Applications
               </button>
+
+          <button
+            onClick={() => navigate("/admin/daily-poster")}
+          >
+            <FaPalette />
+            Daily Poster
+          </button>
         </nav>
 
 

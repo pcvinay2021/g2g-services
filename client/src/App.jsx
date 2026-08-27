@@ -14,6 +14,7 @@ import Contact from "./pages/Contact";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import DailyPoster from "./pages/DailyPoster";
 import ContactEnquiries from "./pages/ContactEnquiries";
 import CareerApplications from "./pages/CareerApplications";
 import AdminRoute from "./components/AdminRoute";
@@ -46,6 +47,7 @@ function App() {
 
           <Route element={<AdminRoute />}>
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/daily-poster" element={<DailyPoster />} />
             <Route path="/admin/contacts" element={<ContactEnquiries />} />
             <Route path="/admin/careers" element={<CareerApplications />} />
           </Route>

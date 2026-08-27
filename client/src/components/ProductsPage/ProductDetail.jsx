@@ -74,6 +74,12 @@ function ProductDetail({ product }) {
 
             </div>
 
+            {product.imageStatus ? (
+              <small style={{ display: "block", marginTop: "8px", opacity: 0.7 }}>
+                {product.imageStatus}
+              </small>
+            ) : null}
+
           </div>
 
 
@@ -89,6 +95,16 @@ function ProductDetail({ product }) {
 
             </span>
 
+
+            {/* MODEL */}
+
+            {product.model ? (
+
+              <span className="product-category-name">
+                Model: {product.model}
+              </span>
+
+            ) : null}
 
             {/* CATEGORY */}
 
@@ -185,12 +201,29 @@ function ProductDetail({ product }) {
 
             <div className="product-secondary-actions">
 
-              {/* DATASHEET */}
+              {/* OFFICIAL MANUFACTURER SOURCE */}
 
-              {product.datasheet ? (
+              {product.officialUrl ? (
 
                 <a
-                  href={product.datasheet}
+                  href={product.officialUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="product-inquiry-btn"
+                >
+
+                  Official Product Page
+
+                </a>
+
+              ) : null}
+
+              {/* DATASHEET */}
+
+              {product.datasheetUrl || product.datasheet ? (
+
+                <a
+                  href={product.datasheetUrl || product.datasheet}
                   target="_blank"
                   rel="noreferrer"
                   className="product-inquiry-btn"

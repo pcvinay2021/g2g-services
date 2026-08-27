@@ -1,3 +1,10 @@
+const dns = require("dns");
+
+dns.setServers([
+  "8.8.8.8",
+  "1.1.1.1"
+]);
+
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
@@ -5,6 +12,8 @@ const dotenv = require("dotenv");
 const Admin = require("./models/Admin");
 
 dotenv.config();
+
+dotenv.config({ path: require("path").join(__dirname, "../.env") });
 
 const createAdmin = async () => {
   try {

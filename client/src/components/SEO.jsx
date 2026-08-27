@@ -1,96 +1,123 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-const SITE_URL = "https://g2gservices.in";
+const SITE_URL = "https://g2g-services-1.onrender.com";
 const DEFAULT_IMAGE = `${SITE_URL}/about-company.png`;
 
 const pages = {
   "/": {
-    title: "G2G Services | IT, Networking, CCTV & Security Solutions",
+    title:
+      "G2G Services | Biometric, Access Control & IT Solutions in Prayagraj",
     description:
-      "G2G Services provides IT infrastructure, networking, CCTV surveillance, access control, server, storage and security solutions across India.",
+      "G2G Services provides biometric attendance, access control, boom barrier, video conferencing, audio conferencing, EPABX, intercom, CCTV, networking and IT infrastructure solutions in Prayagraj (Allahabad) and across India.",
   },
+
   "/about": {
-    title: "About G2G Services | IT & Security Solutions",
+    title: "About G2G Services | IT & Security Solutions in Prayagraj",
     description:
-      "Learn about G2G Services and our expertise in IT infrastructure, networking, surveillance, security and technology projects.",
+      "Learn about G2G Services and our expertise in IT infrastructure, networking, biometric attendance, access control, surveillance and security technology solutions in Prayagraj (Allahabad).",
   },
+
   "/services": {
-    title: "IT, Networking & Security Services | G2G Services",
+    title:
+      "IT, Biometric, Access Control & Security Services in Prayagraj | G2G Services",
     description:
-      "Explore G2G Services for networking, CCTV surveillance, IT infrastructure, access control, server, storage and security solutions.",
+      "Explore G2G Services for biometric attendance, access control, boom barriers, EPABX, intercom, video conferencing, audio conferencing, CCTV, networking, server and IT infrastructure services in Prayagraj.",
   },
+
   "/products": {
-    title: "CCTV, Networking & IT Products | G2G Services",
+    title:
+      "Biometric, Access Control, CCTV & IT Products | G2G Services Prayagraj",
     description:
-      "Browse CCTV cameras, NVR, DVR, networking equipment, servers, storage, access control, biometric and other IT products from G2G Services.",
+      "Browse biometric attendance systems, access control equipment, boom barriers, CCTV cameras, NVR, DVR, networking equipment, servers, storage and other IT products from G2G Services.",
   },
+
   "/projects": {
-    title: "Projects | G2G Services",
+    title: "IT & Security Projects | G2G Services Prayagraj",
     description:
-      "Explore technology projects delivered by G2G Services across IT infrastructure, networking, surveillance and security environments.",
+      "Explore technology projects delivered by G2G Services including biometric attendance, access control, networking, surveillance, security and IT infrastructure solutions.",
   },
+
   "/careers": {
-    title: "Careers at G2G Services | Join Our Technology Team",
+    title: "Careers at G2G Services | Technology Team",
     description:
-      "View career opportunities at G2G Services in networking, projects, CCTV surveillance and IT infrastructure.",
+      "View career opportunities at G2G Services in networking, security systems, IT infrastructure, surveillance and technology projects.",
   },
+
   "/gallery": {
-    title: "Gallery | G2G Services",
+    title: "Project Gallery | G2G Services Prayagraj",
     description:
-      "View G2G Services project, technology and solution images.",
+      "View G2G Services project, installation, technology and security solution images.",
   },
+
   "/contact": {
-    title: "Contact G2G Services | IT & Security Solutions",
+    title:
+      "Contact G2G Services | IT & Security Services in Prayagraj",
     description:
-      "Contact G2G Services for IT infrastructure, networking, CCTV, surveillance, access control and security technology requirements.",
+      "Contact G2G Services for biometric, access control, boom barrier, EPABX, intercom, video conferencing, audio conferencing, CCTV, networking and IT infrastructure requirements.",
   },
 };
 
 function setMeta(name, content) {
   let tag = document.head.querySelector(`meta[name="${name}"]`);
+
   if (!tag) {
     tag = document.createElement("meta");
     tag.setAttribute("name", name);
     document.head.appendChild(tag);
   }
+
   tag.setAttribute("content", content);
 }
 
 function setProperty(property, content) {
-  let tag = document.head.querySelector(`meta[property="${property}"]`);
+  let tag = document.head.querySelector(
+    `meta[property="${property}"]`
+  );
+
   if (!tag) {
     tag = document.createElement("meta");
     tag.setAttribute("property", property);
     document.head.appendChild(tag);
   }
+
   tag.setAttribute("content", content);
 }
 
 function setCanonical(url) {
   let link = document.head.querySelector('link[rel="canonical"]');
+
   if (!link) {
     link = document.createElement("link");
     link.setAttribute("rel", "canonical");
     document.head.appendChild(link);
   }
+
   link.setAttribute("href", url);
 }
 
 function SEO() {
   const { pathname } = useLocation();
+
   const page = pages[pathname] || {
-    title: "G2G Services | Technology & Security Solutions",
+    title: "G2G Services | IT & Security Solutions in Prayagraj",
     description:
-      "G2G Services delivers IT, networking, surveillance, security and technology solutions.",
+      "G2G Services provides IT infrastructure, biometric, access control, networking, surveillance and security technology solutions in Prayagraj (Allahabad) and across India.",
   };
 
   useEffect(() => {
-    const canonicalUrl = `${SITE_URL}${pathname === "/" ? "/" : pathname}`;
+    const cleanPath =
+      pathname === "/" ? "/" : pathname.replace(/\/+$/, "");
+
+    const canonicalUrl = `${SITE_URL}${cleanPath}`;
 
     document.title = page.title;
+
     setMeta("description", page.description);
-    setMeta("robots", "index, follow, max-image-preview:large");
+    setMeta(
+      "robots",
+      "index, follow, max-image-preview:large"
+    );
     setMeta("theme-color", "#052B35");
 
     setProperty("og:type", "website");
@@ -100,30 +127,72 @@ function SEO() {
     setProperty("og:url", canonicalUrl);
     setProperty("og:image", DEFAULT_IMAGE);
 
-    setProperty("twitter:card", "summary_large_image");
-    setProperty("twitter:title", page.title);
-    setProperty("twitter:description", page.description);
-    setProperty("twitter:image", DEFAULT_IMAGE);
+    setMeta("twitter:card", "summary_large_image");
+    setMeta("twitter:title", page.title);
+    setMeta("twitter:description", page.description);
+    setMeta("twitter:image", DEFAULT_IMAGE);
 
     setCanonical(canonicalUrl);
 
-    const existingSchema = document.getElementById("g2g-organization-schema");
-    if (existingSchema) existingSchema.remove();
+    const existingSchema = document.getElementById(
+      "g2g-local-business-schema"
+    );
+
+    if (existingSchema) {
+      existingSchema.remove();
+    }
 
     const schema = document.createElement("script");
-    schema.id = "g2g-organization-schema";
+
+    schema.id = "g2g-local-business-schema";
     schema.type = "application/ld+json";
+
     schema.textContent = JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "Organization",
+      "@type": "LocalBusiness",
       name: "G2G Services",
       url: SITE_URL,
-      logo: `${SITE_URL}/about-company.png`,
-      email: "mailto:info@g2gservices.in",
-      telephone: "+91-70800-10039",
+      image: DEFAULT_IMAGE,
+      logo: `${SITE_URL}/favicon.svg`,
+      telephone: "+918896282060",
       description:
-        "IT infrastructure, networking, CCTV surveillance, access control and security technology solutions.",
+        "G2G Services provides biometric attendance, access control, boom barrier, video conferencing, audio conferencing, EPABX, intercom, CCTV, networking and IT infrastructure solutions.",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "Civil Line",
+        addressLocality: "Prayagraj",
+        addressRegion: "Uttar Pradesh",
+        postalCode: "211001",
+        addressCountry: "IN",
+      },
+      areaServed: [
+        {
+          "@type": "City",
+          name: "Prayagraj",
+        },
+        {
+          "@type": "Place",
+          name: "Allahabad",
+        },
+        {
+          "@type": "Country",
+          name: "India",
+        },
+      ],
+      serviceType: [
+        "Biometric Attendance System",
+        "Access Control System",
+        "Boom Barrier Installation",
+        "Video Conferencing",
+        "Audio Conferencing",
+        "EPABX Installation",
+        "Intercom Installation",
+        "CCTV Surveillance",
+        "Networking Services",
+        "IT Infrastructure Services",
+      ],
     });
+
     document.head.appendChild(schema);
 
     return () => {

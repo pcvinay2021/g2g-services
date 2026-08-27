@@ -12,6 +12,10 @@ const contactRoutes = require("./routes/contactRoutes");
 const careerRoutes = require("./routes/careerRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const adminCareerRoutes = require("./routes/adminCareerRoutes");
+const 
+    {
+      startPosterScheduler,
+    } = require("./services/posterScheduler");
 
 
 // MongoDB

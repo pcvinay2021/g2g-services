@@ -12,8 +12,9 @@ const dotenv = require("dotenv");
 const Admin = require("./models/Admin");
 
 dotenv.config();
-
-dotenv.config({ path: require("path").join(__dirname, "../.env") });
+dotenv.config({
+  path: require("path").join(__dirname, "../.env")
+});
 
 const createAdmin = async () => {
   try {
@@ -26,27 +27,35 @@ const createAdmin = async () => {
     ).toLowerCase().trim();
 
     const password = process.env.ADMIN_PASSWORD;
+
     const name =
       process.env.ADMIN_NAME || "G2G Administrator";
 
     if (!password) {
       throw new Error(
-        "ADMIN_PASSWORD is required in server/.env before creating an admin."
+        "ADMIN_PASSWORD is required before creating/updating an admin."
       );
     }
 
     await mongoose.connect(mongoUri);
     console.log("MongoDB Connected");
 
+    const hashedPassword = await bcrypt.hash(password, 12);
+
     const existingAdmin = await Admin.findOne({ email });
 
     if (existingAdmin) {
-      console.log("Admin already exists.");
+      existingAdmin.name = name;
+      existingAdmin.password = hashedPassword;
+      existingAdmin.role = "admin";
+
+      await existingAdmin.save();
+
+      console.log("G2G admin password updated successfully:", email);
+
       await mongoose.disconnect();
       process.exit(0);
     }
-
-    const hashedPassword = await bcrypt.hash(password, 12);
 
     await Admin.create({
       name,
@@ -59,9 +68,12 @@ const createAdmin = async () => {
 
     await mongoose.disconnect();
     process.exit(0);
+
   } catch (error) {
-    console.error("Create Admin Error:", error.message);
+    console.error("Create/Update Admin Error:", error.message);
+
     await mongoose.disconnect().catch(() => {});
+
     process.exit(1);
   }
 };

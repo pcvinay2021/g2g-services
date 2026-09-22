@@ -93,33 +93,40 @@ function setCanonical(url) {
     document.head.appendChild(link);
   }
 
+  // Remove any old canonical value before setting the current route.
+  link.removeAttribute("href");
   link.setAttribute("href", url);
 }
 
 function SEO() {
   const { pathname } = useLocation();
 
-  const page = pages[pathname] || {
+  const cleanPath =
+    pathname === "/"
+      ? "/"
+      : pathname.replace(/\/+$/, "");
+
+  const page = pages[cleanPath] || {
     title: "G2G Services | IT & Security Solutions in Prayagraj",
     description:
       "G2G Services provides IT infrastructure, biometric, access control, networking, surveillance and security technology solutions in Prayagraj (Allahabad) and across India.",
   };
 
   useEffect(() => {
-    const cleanPath =
-      pathname === "/" ? "/" : pathname.replace(/\/+$/, "");
-
     const canonicalUrl = `${SITE_URL}${cleanPath}`;
 
     document.title = page.title;
 
     setMeta("description", page.description);
+
     setMeta(
       "robots",
       "index, follow, max-image-preview:large"
     );
+
     setMeta("theme-color", "#052B35");
 
+    // Open Graph
     setProperty("og:type", "website");
     setProperty("og:site_name", "G2G Services");
     setProperty("og:title", page.title);
@@ -127,13 +134,16 @@ function SEO() {
     setProperty("og:url", canonicalUrl);
     setProperty("og:image", DEFAULT_IMAGE);
 
+    // Twitter
     setMeta("twitter:card", "summary_large_image");
     setMeta("twitter:title", page.title);
     setMeta("twitter:description", page.description);
     setMeta("twitter:image", DEFAULT_IMAGE);
 
+    // Canonical
     setCanonical(canonicalUrl);
 
+    // LocalBusiness Schema
     const existingSchema = document.getElementById(
       "g2g-local-business-schema"
     );
@@ -155,8 +165,10 @@ function SEO() {
       image: DEFAULT_IMAGE,
       logo: `${SITE_URL}/favicon.svg`,
       telephone: "+918896282060",
+
       description:
         "G2G Services provides biometric attendance, access control, boom barrier, video conferencing, audio conferencing, EPABX, intercom, CCTV, networking and IT infrastructure solutions.",
+
       address: {
         "@type": "PostalAddress",
         streetAddress: "Civil Line",
@@ -165,6 +177,7 @@ function SEO() {
         postalCode: "211001",
         addressCountry: "IN",
       },
+
       areaServed: [
         {
           "@type": "City",
@@ -179,6 +192,7 @@ function SEO() {
           name: "India",
         },
       ],
+
       serviceType: [
         "Biometric Attendance System",
         "Access Control System",
@@ -198,7 +212,7 @@ function SEO() {
     return () => {
       schema.remove();
     };
-  }, [pathname, page.title, page.description]);
+  }, [cleanPath, page.title, page.description]);
 
   return null;
 }

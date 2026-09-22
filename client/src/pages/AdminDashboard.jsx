@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import {
   FaBars,
-  FaPalette,
   FaBriefcase,
   FaEnvelope,
   FaSignOutAlt,
   FaUsers,
   FaPhone,
   FaClock,
+  FaSyncAlt,
+  FaCheckCircle,
 } from "react-icons/fa";
+
 import { apiUrl } from "../config/api";
 
 import "./AdminDashboard.css";
@@ -19,12 +22,17 @@ function AdminDashboard() {
 
   const [admin, setAdmin] = useState(null);
   const [dashboard, setDashboard] = useState(null);
+
   const [contacts, setContacts] = useState([]);
   const [careers, setCareers] = useState([]);
 
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [error, setError] = useState("");
+
+  const [lastUpdated, setLastUpdated] = useState(null);
 
   const token = localStorage.getItem("g2g_admin_token");
 
@@ -37,9 +45,19 @@ function AdminDashboard() {
     loadDashboard();
   }, []);
 
-  const loadDashboard = async () => {
+  /* =========================
+     LOAD DASHBOARD
+  ========================= */
+
+  const loadDashboard = async (isRefresh = false) => {
     try {
-      setLoading(true);
+      if (isRefresh) {
+        setRefreshing(true);
+      } else {
+        setLoading(true);
+      }
+
+      setError("");
 
       const headers = {
         Authorization: `Bearer ${token}`,
@@ -55,36 +73,35 @@ function AdminDashboard() {
           headers,
         }),
 
-        fetch(
-          apiUrl("/api/admin/dashboard"),
-          {
-            headers,
-          }
-        ),
+        fetch(apiUrl("/api/admin/dashboard"), {
+          headers,
+        }),
 
-        fetch(
-          apiUrl("/api/admin/contacts"),
-          {
-            headers,
-          }
-        ),
+        fetch(apiUrl("/api/admin/contacts"), {
+          headers,
+        }),
 
-        fetch(
-          apiUrl("/api/admin/careers"),
-          {
-            headers,
-          }
-        ),
+        fetch(apiUrl("/api/admin/careers"), {
+          headers,
+        }),
       ]);
 
-      if ([
+      const responses = [
         profileResponse,
         dashboardResponse,
         contactsResponse,
         careersResponse,
-      ].some((response) => response.status === 401)) {
+      ];
+
+      if (responses.some((response) => response.status === 401)) {
         logout();
         return;
+      }
+
+      if (responses.some((response) => !response.ok)) {
+        throw new Error(
+          "Unable to load dashboard data."
+        );
       }
 
       const profile = await profileResponse.json();
@@ -99,13 +116,16 @@ function AdminDashboard() {
 
       if (!profile.success) {
         throw new Error(
-          profile.message || "Unable to load profile."
+          profile.message ||
+            "Unable to load administrator profile."
         );
       }
 
       setAdmin(profile.data);
 
-      setDashboard(dashboardData.data);
+      setDashboard(
+        dashboardData.data || {}
+      );
 
       setContacts(
         contactsData.data || []
@@ -115,8 +135,13 @@ function AdminDashboard() {
         careersData.data || []
       );
 
+      setLastUpdated(new Date());
+
     } catch (err) {
-      console.error(err);
+      console.error(
+        "Admin Dashboard:",
+        err
+      );
 
       setError(
         err.message ||
@@ -125,8 +150,13 @@ function AdminDashboard() {
 
     } finally {
       setLoading(false);
+      setRefreshing(false);
     }
   };
+
+  /* =========================
+     LOGOUT
+  ========================= */
 
   const logout = () => {
     localStorage.removeItem(
@@ -139,6 +169,19 @@ function AdminDashboard() {
 
     navigate("/admin");
   };
+
+  /* =========================
+     NAVIGATION
+  ========================= */
+
+  const goTo = (path) => {
+    setSidebarOpen(false);
+    navigate(path);
+  };
+
+  /* =========================
+     DATE FORMAT
+  ========================= */
 
   const formatDate = (date) => {
     if (!date) return "-";
@@ -153,23 +196,144 @@ function AdminDashboard() {
     );
   };
 
+  const formatTime = (date) => {
+    if (!date) return "";
+
+    return new Date(date).toLocaleTimeString(
+      "en-IN",
+      {
+        hour: "2-digit",
+        minute: "2-digit",
+      }
+    );
+  };
+
+  /* =========================
+     STATUS HELPERS
+  ========================= */
+
+  const getStatus = (value) => {
+    return String(value || "New")
+      .trim()
+      .toLowerCase()
+      .replace(/[\s_-]+/g, " ");
+  };
+
+  /* =========================
+     CONTACT COUNTS
+  ========================= */
+
+  const contactTotal =
+    dashboard?.totalContacts ??
+    contacts.length;
+
+  const contactNew =
+    contacts.filter(
+      (item) =>
+        getStatus(item.status) === "new"
+    ).length;
+
+  const contactResolved =
+    contacts.filter(
+      (item) =>
+        getStatus(item.status) ===
+        "resolved"
+    ).length;
+
+  /* =========================
+     CAREER COUNTS
+  ========================= */
+
+  const careerTotal =
+    dashboard?.totalCareers ??
+    careers.length;
+
+  const careerNew =
+    careers.filter(
+      (item) =>
+        getStatus(item.status) === "new"
+    ).length;
+
+  const careerResolved =
+    careers.filter(
+      (item) =>
+        getStatus(item.status) ===
+        "resolved"
+    ).length;
+
+  /* =========================
+     SUMMARY COUNTS
+  ========================= */
+
+  const shortlisted =
+    dashboard?.careerStatus
+      ?.shortlisted ??
+    careers.filter(
+      (item) =>
+        getStatus(item.status) ===
+        "shortlisted"
+    ).length;
+
+  const newApplications =
+    dashboard?.careerStatus?.new ??
+    careerNew;
+
+  /* =========================
+     RECENT DATA
+  ========================= */
+
+  const recentContacts = [
+    ...contacts,
+  ]
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt || 0) -
+        new Date(a.createdAt || 0)
+    )
+    .slice(0, 5);
+
+  const recentCareers = [
+    ...careers,
+  ]
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt || 0) -
+        new Date(a.createdAt || 0)
+    )
+    .slice(0, 5);
+
+  /* =========================
+     LOADING
+  ========================= */
+
   if (loading) {
     return (
       <div className="admin-loading">
         <div className="admin-loader" />
-        <p>Loading G2G Dashboard...</p>
+
+        <p>
+          Loading G2G Dashboard...
+        </p>
       </div>
     );
   }
 
+  /* =========================
+     UI
+  ========================= */
+
   return (
     <main className="admin-dashboard">
 
-      {/* SIDEBAR */}
+      {/* =========================
+          SIDEBAR
+      ========================= */}
 
       <aside
         className={`admin-sidebar ${
-          sidebarOpen ? "open" : ""
+          sidebarOpen
+            ? "open"
+            : ""
         }`}
       >
 
@@ -180,105 +344,174 @@ function AdminDashboard() {
           </div>
 
           <div>
-            <strong>G2G SERVICES</strong>
-            <small>ADMIN PANEL</small>
+            <strong>
+              G2G SERVICES
+            </strong>
+
+            <small>
+              ADMIN PANEL
+            </small>
           </div>
 
         </div>
 
-
         <nav className="admin-nav">
 
-          <button className="active">
-            <span>▦</span>
+          <button
+            className="active"
+            onClick={() =>
+              goTo("/admin/dashboard")
+            }
+          >
+            <span className="nav-icon">
+              ▦
+            </span>
+
             Dashboard
           </button>
 
           <button
-           onClick={() =>
-            navigate("/admin/contacts")
-              }
-                >
-                <FaEnvelope />
-                Contact Enquiries
-              </button>
-
-          <button
-                onClick={() =>
-                  navigate("/admin/careers")
-                }
-              >
-                <FaBriefcase />
-                Career Applications
-              </button>
-
-          <button
-            onClick={() => navigate("/admin/daily-poster")}
+            onClick={() =>
+              goTo("/admin/contacts")
+            }
           >
-            <FaPalette />
+            <FaEnvelope />
+
+            Contact Enquiries
+          </button>
+
+          <button
+            onClick={() =>
+              goTo("/admin/careers")
+            }
+          >
+            <FaBriefcase />
+
+            Career Applications
+          </button>
+
+          <button
+            onClick={() =>
+              goTo("/admin/daily-poster")
+            }
+          >
+            <span className="nav-icon">
+              ◉
+            </span>
+
             Daily Poster
           </button>
-        </nav>
 
+        </nav>
 
         <button
           className="admin-logout"
           onClick={logout}
         >
           <FaSignOutAlt />
+
           Logout
         </button>
 
       </aside>
 
-
-      {/* MAIN */}
+      {/* =========================
+          MAIN
+      ========================= */}
 
       <section className="admin-main">
 
-        {/* TOPBAR */}
+        {/* =========================
+            TOPBAR
+        ========================= */}
 
         <header className="admin-topbar">
 
           <button
             className="admin-menu-btn"
             onClick={() =>
-              setSidebarOpen(!sidebarOpen)
+              setSidebarOpen(
+                !sidebarOpen
+              )
             }
+            aria-label="Open menu"
           >
             <FaBars />
           </button>
 
-          <div>
-            <small>ADMINISTRATION</small>
-            <h1>Dashboard</h1>
+          <div className="admin-heading">
+
+            <small>
+              ADMINISTRATION
+            </small>
+
+            <h1>
+              Dashboard
+            </h1>
+
+            {lastUpdated && (
+              <p className="admin-last-updated">
+                Last updated{" "}
+                {formatTime(
+                  lastUpdated
+                )}
+              </p>
+            )}
+
           </div>
 
+          <div className="admin-topbar-right">
 
-          <div className="admin-user">
+            <button
+              className={`admin-refresh-btn ${
+                refreshing
+                  ? "refreshing"
+                  : ""
+              }`}
+              onClick={() =>
+                loadDashboard(true)
+              }
+              disabled={refreshing}
+              title="Refresh dashboard"
+            >
+              <FaSyncAlt />
 
-            <div className="admin-user-avatar">
-              {admin?.name
-                ?.charAt(0)
-                ?.toUpperCase() || "A"}
-            </div>
+              <span>
+                {refreshing
+                  ? "Refreshing..."
+                  : "Refresh"}
+              </span>
+            </button>
 
-            <div>
-              <strong>
-                {admin?.name || "Administrator"}
-              </strong>
+            <div className="admin-user">
 
-              <small>
-                {admin?.email}
-              </small>
+              <div className="admin-user-avatar">
+                {admin?.name
+                  ?.charAt(0)
+                  ?.toUpperCase() ||
+                  "A"}
+              </div>
+
+              <div>
+                <strong>
+                  {admin?.name ||
+                    "Administrator"}
+                </strong>
+
+                <small>
+                  {admin?.email}
+                </small>
+              </div>
+
             </div>
 
           </div>
 
         </header>
 
-
-        {/* ERROR */}
+        {/* =========================
+            ERROR
+        ========================= */}
 
         {error && (
           <div className="admin-error">
@@ -286,8 +519,9 @@ function AdminDashboard() {
           </div>
         )}
 
-
-        {/* SUMMARY */}
+        {/* =========================
+            TOP SUMMARY
+        ========================= */}
 
         <section className="admin-stats">
 
@@ -298,14 +532,20 @@ function AdminDashboard() {
             </div>
 
             <div>
-              <span>CONTACT ENQUIRIES</span>
+              <span>
+                CONTACT ENQUIRIES
+              </span>
+
               <strong>
-                {dashboard?.totalContacts || 0}
+                {contactTotal}
               </strong>
+
+              <small>
+                {contactNew} new enquiries
+              </small>
             </div>
 
           </div>
-
 
           <div className="admin-stat-card">
 
@@ -314,14 +554,20 @@ function AdminDashboard() {
             </div>
 
             <div>
-              <span>CAREER APPLICATIONS</span>
+              <span>
+                CAREER APPLICATIONS
+              </span>
+
               <strong>
-                {dashboard?.totalCareers || 0}
+                {careerTotal}
               </strong>
+
+              <small>
+                {newApplications} new applications
+              </small>
             </div>
 
           </div>
-
 
           <div className="admin-stat-card">
 
@@ -330,15 +576,20 @@ function AdminDashboard() {
             </div>
 
             <div>
-              <span>SHORTLISTED</span>
+              <span>
+                SHORTLISTED
+              </span>
+
               <strong>
-                {dashboard?.careerStatus
-                  ?.shortlisted || 0}
+                {shortlisted}
               </strong>
+
+              <small>
+                Candidates shortlisted
+              </small>
             </div>
 
           </div>
-
 
           <div className="admin-stat-card">
 
@@ -347,44 +598,211 @@ function AdminDashboard() {
             </div>
 
             <div>
-              <span>NEW APPLICATIONS</span>
+              <span>
+                NEW APPLICATIONS
+              </span>
+
               <strong>
-                {dashboard?.careerStatus?.new ||
-                  0}
+                {newApplications}
               </strong>
+
+              <small>
+                Requires attention
+              </small>
             </div>
 
           </div>
 
         </section>
 
+        {/* =========================
+            CONTACT + CAREER STATUS
+        ========================= */}
 
-        {/* CONTENT GRID */}
+        <section className="admin-status-overview">
+
+          {/* CONTACT */}
+
+          <div className="admin-status-group">
+
+            <div className="admin-status-title">
+
+              <div className="admin-status-main-icon">
+                <FaEnvelope />
+              </div>
+
+              <div>
+                <span>
+                  CONTACT ENQUIRIES
+                </span>
+
+                <h2>
+                  Contact Enquiries
+                </h2>
+              </div>
+
+            </div>
+
+            <div className="admin-status-counts">
+
+              <div className="admin-status-count">
+
+                <span>
+                  Total
+                </span>
+
+                <strong>
+                  {contactTotal}
+                </strong>
+
+              </div>
+
+              <div className="admin-status-divider" />
+
+              <div className="admin-status-count">
+
+                <span>
+                  New
+                </span>
+
+                <strong className="new-count">
+                  {contactNew}
+                </strong>
+
+              </div>
+
+              <div className="admin-status-divider" />
+
+              <div className="admin-status-count">
+
+                <span>
+                  Resolved
+                </span>
+
+                <strong className="resolved-count">
+                  {contactResolved}
+                </strong>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div className="admin-status-separator" />
+
+          {/* CAREERS */}
+
+          <div className="admin-status-group">
+
+            <div className="admin-status-title">
+
+              <div className="admin-status-main-icon">
+                <FaBriefcase />
+              </div>
+
+              <div>
+                <span>
+                  RECRUITMENT
+                </span>
+
+                <h2>
+                  Career Applications
+                </h2>
+              </div>
+
+            </div>
+
+            <div className="admin-status-counts">
+
+              <div className="admin-status-count">
+
+                <span>
+                  Total
+                </span>
+
+                <strong>
+                  {careerTotal}
+                </strong>
+
+              </div>
+
+              <div className="admin-status-divider" />
+
+              <div className="admin-status-count">
+
+                <span>
+                  New
+                </span>
+
+                <strong className="new-count">
+                  {careerNew}
+                </strong>
+
+              </div>
+
+              <div className="admin-status-divider" />
+
+              <div className="admin-status-count">
+
+                <span>
+                  Resolved
+                </span>
+
+                <strong className="resolved-count">
+                  {careerResolved}
+                </strong>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        {/* =========================
+            CONTENT GRID
+        ========================= */}
 
         <section className="admin-content-grid">
 
-          {/* CONTACTS */}
+          {/* CONTACT ENQUIRIES */}
 
           <div className="admin-panel">
 
             <div className="admin-panel-heading">
 
               <div>
-                <span>RECENT ACTIVITY</span>
-                <h2>Contact Enquiries</h2>
+
+                <span>
+                  RECENT ACTIVITY
+                </span>
+
+                <h2>
+                  Contact Enquiries
+                </h2>
+
               </div>
 
               <button
                 type="button"
-                onClick={() => navigate("/admin/contacts")}
+                onClick={() =>
+                  goTo(
+                    "/admin/contacts"
+                  )
+                }
               >
                 View All
+                <span>
+                  →
+                </span>
               </button>
 
             </div>
 
-
-            {contacts.length === 0 ? (
+            {recentContacts.length ===
+            0 ? (
 
               <div className="admin-empty">
                 No contact enquiries yet.
@@ -398,50 +816,85 @@ function AdminDashboard() {
 
                   <thead>
                     <tr>
-                      <th>Name</th>
-                      <th>Subject</th>
-                      <th>Phone</th>
-                      <th>Date</th>
+                      <th>
+                        Name
+                      </th>
+
+                      <th>
+                        Subject
+                      </th>
+
+                      <th>
+                        Status
+                      </th>
+
+                      <th>
+                        Date
+                      </th>
                     </tr>
                   </thead>
 
                   <tbody>
 
-                    {contacts
-                      .slice(0, 5)
-                      .map((contact) => (
+                    {recentContacts.map(
+                      (contact) => {
 
-                        <tr key={contact._id}>
+                        const status =
+                          getStatus(
+                            contact.status
+                          );
 
-                          <td>
-                            <strong>
-                              {contact.name}
-                            </strong>
+                        return (
+                          <tr
+                            key={
+                              contact._id
+                            }
+                          >
 
-                            <small>
-                              {contact.email}
-                            </small>
-                          </td>
+                            <td>
 
-                          <td>
-                            {contact.subject ||
-                              "General Enquiry"}
-                          </td>
+                              <strong>
+                                {contact.name ||
+                                  "Unknown"}
+                              </strong>
 
-                          <td>
-                            {contact.phone ||
-                              "-"}
-                          </td>
+                              <small>
+                                {contact.email ||
+                                  "-"}
+                              </small>
 
-                          <td>
-                            {formatDate(
-                              contact.createdAt
-                            )}
-                          </td>
+                            </td>
 
-                        </tr>
+                            <td>
+                              {contact.subject ||
+                                "General Enquiry"}
+                            </td>
 
-                      ))}
+                            <td>
+
+                              <span
+                                className={`status ${status
+                                  .replace(
+                                    /\s+/g,
+                                    "-"
+                                  )}`}
+                              >
+                                {contact.status ||
+                                  "New"}
+                              </span>
+
+                            </td>
+
+                            <td>
+                              {formatDate(
+                                contact.createdAt
+                              )}
+                            </td>
+
+                          </tr>
+                        );
+                      }
+                    )}
 
                   </tbody>
 
@@ -453,29 +906,42 @@ function AdminDashboard() {
 
           </div>
 
-
-          {/* CAREERS */}
+          {/* CAREER APPLICATIONS */}
 
           <div className="admin-panel">
 
             <div className="admin-panel-heading">
 
               <div>
-                <span>RECRUITMENT</span>
-                <h2>Career Applications</h2>
+
+                <span>
+                  RECRUITMENT
+                </span>
+
+                <h2>
+                  Career Applications
+                </h2>
+
               </div>
 
               <button
                 type="button"
-                onClick={() => navigate("/admin/careers")}
+                onClick={() =>
+                  goTo(
+                    "/admin/careers"
+                  )
+                }
               >
                 View All
+                <span>
+                  →
+                </span>
               </button>
 
             </div>
 
-
-            {careers.length === 0 ? (
+            {recentCareers.length ===
+            0 ? (
 
               <div className="admin-empty">
                 No career applications yet.
@@ -485,64 +951,69 @@ function AdminDashboard() {
 
               <div className="admin-career-list">
 
-                {careers
-                  .slice(0, 5)
-                  .map((career) => (
+                {recentCareers.map(
+                  (career) => {
 
-                    <div
-                      className="admin-career-item"
-                      key={career._id}
-                    >
+                    const status =
+                      getStatus(
+                        career.status
+                      );
 
-                      <div className="admin-career-avatar">
-                        {career.name
-                          ?.charAt(0)
-                          ?.toUpperCase()}
-                      </div>
+                    return (
+                      <div
+                        className="admin-career-item"
+                        key={
+                          career._id
+                        }
+                      >
 
-                      <div className="admin-career-info">
+                        <div className="admin-career-avatar">
+                          {career.name
+                            ?.charAt(0)
+                            ?.toUpperCase() ||
+                            "A"}
+                        </div>
 
-                        <strong>
-                          {career.name}
-                        </strong>
+                        <div className="admin-career-info">
 
-                        <span>
-                          {career.position ||
-                            "General Application"}
-                        </span>
+                          <strong>
+                            {career.name ||
+                              "Applicant"}
+                          </strong>
 
-                      </div>
+                          <span>
+                            {career.position ||
+                              career.jobTitle ||
+                              "General Application"}
+                          </span>
 
-                      <div className="admin-career-right">
+                        </div>
 
-                        <span
-                          className={`status ${
-                            (
-                              career.status ||
-                              "New"
-                            )
-                              .toLowerCase()
+                        <div className="admin-career-right">
+
+                          <span
+                            className={`status ${status
                               .replace(
-                                " ",
+                                /\s+/g,
                                 "-"
-                              )
-                          }`}
-                        >
-                          {career.status ||
-                            "New"}
-                        </span>
+                              )}`}
+                          >
+                            {career.status ||
+                              "New"}
+                          </span>
 
-                        <small>
-                          {formatDate(
-                            career.createdAt
-                          )}
-                        </small>
+                          <small>
+                            {formatDate(
+                              career.createdAt
+                            )}
+                          </small>
+
+                        </div>
 
                       </div>
-
-                    </div>
-
-                  ))}
+                    );
+                  }
+                )}
 
               </div>
 
@@ -552,14 +1023,17 @@ function AdminDashboard() {
 
         </section>
 
-
-        {/* QUICK INFO */}
+        {/* =========================
+            BOTTOM
+        ========================= */}
 
         <section className="admin-bottom-grid">
 
           <div className="admin-welcome-card">
 
-            <span>G2G SERVICES</span>
+            <span>
+              G2G SERVICES
+            </span>
 
             <h2>
               Manage your business
@@ -569,12 +1043,12 @@ function AdminDashboard() {
 
             <p>
               Monitor enquiries, career
-              applications and website activity
-              from your administration panel.
+              applications and website
+              activity from your
+              administration panel.
             </p>
 
           </div>
-
 
           <div className="admin-contact-card">
 
@@ -583,7 +1057,10 @@ function AdminDashboard() {
             </div>
 
             <div>
-              <span>BUSINESS SUPPORT</span>
+
+              <span>
+                BUSINESS SUPPORT
+              </span>
 
               <strong>
                 +91 70800 10039
@@ -592,6 +1069,7 @@ function AdminDashboard() {
               <small>
                 info@g2gservices.in
               </small>
+
             </div>
 
           </div>

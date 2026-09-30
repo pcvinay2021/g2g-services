@@ -291,5 +291,102 @@ router.delete("/contacts/:id", adminAuth, async (req, res) => {
   }
 });
 
+const MobileUser = require("../models/MobileUser");
 
+router.post(
+  "/provision-mobile-users",
+  adminAuth,
+  async (req, res) => {
+    try {
+      const bcrypt = require("bcryptjs");
+
+      const users = [
+        {
+          name: process.env.MOBILE_MANAGER_NAME,
+          mobile: process.env.MOBILE_MANAGER_MOBILE,
+          loginId: process.env.MOBILE_MANAGER_LOGIN_ID,
+          password: process.env.MOBILE_MANAGER_PASSWORD,
+          role: "MANAGER",
+        },
+        {
+          name: process.env.MOBILE_TECHNICIAN_NAME,
+          mobile: process.env.MOBILE_TECHNICIAN_MOBILE,
+          loginId: process.env.MOBILE_TECHNICIAN_LOGIN_ID,
+          password: process.env.MOBILE_TECHNICIAN_PASSWORD,
+          role: "TECHNICIAN",
+        },
+      ];
+
+      const results = [];
+
+      for (const user of users) {
+        if (
+          !user.name ||
+          !user.loginId ||
+          !user.password
+        ) {
+          return res.status(500).json({
+            success: false,
+            message: `${user.role} provisioning environment variables are missing.`,
+          });
+        }
+
+        const loginId = String(user.loginId)
+          .trim()
+          .toUpperCase();
+
+        const existing = await MobileUser.findOne({
+          loginId,
+        });
+
+        if (existing) {
+          results.push({
+            role: user.role,
+            loginId,
+            status: "ALREADY_EXISTS",
+          });
+          continue;
+        }
+
+        const hashedPassword = await bcrypt.hash(
+          user.password,
+          12
+        );
+
+        await MobileUser.create({
+          name: user.name,
+          mobile: user.mobile,
+          loginId,
+          password: hashedPassword,
+          role: user.role,
+          active: true,
+          mustChangePassword: true,
+        });
+
+        results.push({
+          role: user.role,
+          loginId,
+          status: "CREATED",
+        });
+      }
+
+      return res.json({
+        success: true,
+        message: "Mobile user provisioning completed.",
+        results,
+      });
+
+    } catch (error) {
+      console.error(
+        "Mobile User Provisioning Error:",
+        error
+      );
+
+      return res.status(500).json({
+        success: false,
+        message: "Mobile user provisioning failed.",
+      });
+    }
+  }
+);
 module.exports = router;

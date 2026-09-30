@@ -389,4 +389,82 @@ router.post(
     }
   }
 );
+// =====================================================
+// TEMPORARY MOBILE PASSWORD RESET
+// POST /api/admin/reset-mobile-passwords
+// REMOVE AFTER ONE-TIME PASSWORD RESET
+// =====================================================
+
+router.post(
+  "/reset-mobile-passwords",
+  adminAuth,
+  async (req, res) => {
+    try {
+      const { managerPassword, technicianPassword } = req.body;
+
+      if (
+        !managerPassword ||
+        !technicianPassword ||
+        String(managerPassword).length < 4 ||
+        String(technicianPassword).length < 4
+      ) {
+        return res.status(400).json({
+          success: false,
+          message: "Both passwords are required and must be at least 4 characters.",
+        });
+      }
+
+      const manager = await MobileUser.findOne({
+        role: "MANAGER",
+        loginId: "MANAGER",
+        active: true,
+      });
+
+      const technician = await MobileUser.findOne({
+        role: "TECHNICIAN",
+        loginId: "TECH",
+        active: true,
+      });
+
+      if (!manager || !technician) {
+        return res.status(404).json({
+          success: false,
+          message: "Manager or Technician user not found.",
+        });
+      }
+
+      manager.password = await bcrypt.hash(String(managerPassword), 12);
+      manager.mustChangePassword = true;
+      await manager.save();
+
+      technician.password = await bcrypt.hash(String(technicianPassword), 12);
+      technician.mustChangePassword = true;
+      await technician.save();
+
+      return res.json({
+        success: true,
+        message: "Manager and Technician passwords reset successfully.",
+        users: [
+          {
+            role: "MANAGER",
+            loginId: manager.loginId,
+            status: "PASSWORD_RESET",
+          },
+          {
+            role: "TECHNICIAN",
+            loginId: technician.loginId,
+            status: "PASSWORD_RESET",
+          },
+        ],
+      });
+    } catch (error) {
+      console.error("Mobile Password Reset Error:", error);
+
+      return res.status(500).json({
+        success: false,
+        message: "Unable to reset mobile passwords.",
+      });
+    }
+  }
+);
 module.exports = router;

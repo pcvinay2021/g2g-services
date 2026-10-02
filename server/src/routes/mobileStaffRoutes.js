@@ -22,7 +22,11 @@ router.get("/", async (req, res) => {
   try {
     const q =
       req.user.role === "MANAGER"
-        ? { role: "TECHNICIAN", active: true }
+        ? {
+            role: "TECHNICIAN",
+            active: true,
+            approvalStatus: "APPROVED"
+          }
         : {};
 
     const users = await MobileUser.find(q)
@@ -44,7 +48,7 @@ router.get("/", async (req, res) => {
 });
 
 // CREATE STAFF
-router.post("/", allowRoles("ADMIN"), async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const {
       name,
@@ -103,6 +107,15 @@ router.post("/", allowRoles("ADMIN"), async (req, res) => {
       }
     }
 
+    if (req.user.role === "MANAGER" && cleanRole !== "TECHNICIAN") {
+      return res.status(403).json({
+        success: false,
+        message: "Manager can create technicians only."
+      });
+    }
+
+    const isAdmin = req.user.role === "ADMIN";
+
     const u = await MobileUser.create({
       name: cleanName,
       mobile: cleanMobile || undefined,
@@ -110,7 +123,8 @@ router.post("/", allowRoles("ADMIN"), async (req, res) => {
       loginId: cleanLoginId,
       password: await bcrypt.hash(password, 12),
       mustChangePassword: true,
-      active: true
+      active: isAdmin,
+      approvalStatus: isAdmin ? "APPROVED" : "PENDING"
     });
 
     res.status(201).json({
@@ -273,4 +287,93 @@ router.delete("/:id", allowRoles("ADMIN"), async (req, res) => {
   }
 });
 
+// APPROVE STAFF
+router.patch("/:id/approve", allowRoles("ADMIN"), async (req, res) => {
+  try {
+    const u = await MobileUser.findById(req.params.id);
+
+    if (!u) {
+      return res.status(404).json({
+        success: false,
+        message: "Staff not found."
+      });
+    }
+
+    if (u.approvalStatus !== "PENDING") {
+      return res.status(400).json({
+        success: false,
+        message: "This staff member is not pending approval."
+      });
+    }
+
+    u.approvalStatus = "APPROVED";
+    u.active = true;
+    u.approvedBy = req.user.id;
+    u.approvedAt = new Date();
+    u.rejectedBy = null;
+    u.rejectedAt = null;
+
+    await u.save();
+
+    res.json({
+      success: true,
+      message: "Staff approved successfully.",
+      data: safe(u)
+    });
+  } catch (e) {
+    console.error("APPROVE STAFF:", e);
+
+    res.status(500).json({
+      success: false,
+      message: "Unable to approve staff."
+    });
+  }
+});
+
+// REJECT STAFF
+router.patch("/:id/reject", allowRoles("ADMIN"), async (req, res) => {
+  try {
+    const u = await MobileUser.findById(req.params.id);
+
+    if (!u) {
+      return res.status(404).json({
+        success: false,
+        message: "Staff not found."
+      });
+    }
+
+    if (u.approvalStatus !== "PENDING") {
+      return res.status(400).json({
+        success: false,
+        message: "This staff member is not pending approval."
+      });
+    }
+
+    u.approvalStatus = "REJECTED";
+    u.active = false;
+    u.rejectedBy = req.user.id;
+    u.rejectedAt = new Date();
+    u.approvedBy = null;
+    u.approvedAt = null;
+
+    await u.save();
+
+    res.json({
+      success: true,
+      message: "Staff rejected.",
+      data: safe(u)
+    });
+  } catch (e) {
+    console.error("REJECT STAFF:", e);
+
+    res.status(500).json({
+      success: false,
+      message: "Unable to reject staff."
+    });
+  }
+});
+
 module.exports = router;
+
+
+

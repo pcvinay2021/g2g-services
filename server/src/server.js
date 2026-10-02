@@ -21,6 +21,7 @@ const mobileAuthRoutes = require("./routes/mobileAuthRoutes");
 const mobileStaffRoutes = require("./routes/mobileStaffRoutes");
 const complaintRoutes = require("./routes/complaintRoutes");
 const customerRoutes = require("./routes/customerRoutes");
+const mobileServiceRoutes = require("./routes/mobileServiceRoutes");
 
 const {
   startPosterScheduler,
@@ -101,6 +102,7 @@ app.use("/api/mobile/auth", mobileAuthRoutes);
 app.use("/api/mobile/staff", mobileStaffRoutes);
 app.use("/api/mobile/complaints", complaintRoutes);
 app.use("/api/mobile/customers", customerRoutes);
+app.use("/api/mobile/services", mobileServiceRoutes);
 
 // Server
 const PORT = process.env.PORT || 5000;

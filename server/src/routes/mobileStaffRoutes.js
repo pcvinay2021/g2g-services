@@ -1,4 +1,4 @@
-const express = require("express");
+﻿const express = require("express");
 const bcrypt = require("bcryptjs");
 const MobileUser = require("../models/MobileUser");
 const { mobileAuth, allowRoles } = require("../middleware/mobileAuth");
@@ -14,6 +14,7 @@ const safe = (u) => ({
   loginId: u.loginId || "",
   role: u.role,
   active: u.active,
+  approvalStatus: u.approvalStatus || "APPROVED",
   mustChangePassword: !!u.mustChangePassword
 });
 

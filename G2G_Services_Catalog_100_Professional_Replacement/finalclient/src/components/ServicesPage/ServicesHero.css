@@ -1,0 +1,259 @@
+/*==========================================
+        SERVICES HERO
+==========================================*/
+
+.services-hero{
+
+    background:linear-gradient(135deg,#0B2C4D,#0E8AA7);
+
+    color:#fff;
+
+    padding:180px 0 120px;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.services-hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:350px;
+
+    height:350px;
+
+    background:rgba(255,255,255,.05);
+
+    border-radius:50%;
+
+    top:-120px;
+
+    right:-120px;
+
+}
+
+.services-hero::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+
+    height:220px;
+
+    background:rgba(255,255,255,.05);
+
+    border-radius:50%;
+
+    bottom:-70px;
+
+    left:-70px;
+
+}
+
+.services-hero .container{
+
+    position:relative;
+
+    z-index:2;
+
+    text-align:center;
+
+    max-width:900px;
+
+}
+
+.hero-tag{
+
+    display:inline-block;
+
+    padding:10px 24px;
+
+    background:rgba(255,255,255,.15);
+
+    border-radius:30px;
+
+    letter-spacing:2px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    margin-bottom:25px;
+
+}
+
+.services-hero h1{
+
+    font-size:58px;
+
+    font-weight:800;
+
+    line-height:1.2;
+
+    margin-bottom:25px;
+
+}
+
+.services-hero h1 span{
+
+    color:#FFD166;
+
+}
+
+.services-hero p{
+
+    font-size:20px;
+
+    line-height:36px;
+
+    color:#E8F7FA;
+
+    margin-bottom:45px;
+
+}
+
+.hero-btns{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+}
+
+.btn-primary{
+
+    padding:16px 36px;
+
+    border:none;
+
+    border-radius:50px;
+
+    background:#00C4B3;
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+}
+
+.btn-primary:hover{
+
+    background:#009F92;
+
+    transform:translateY(-5px);
+
+}
+
+.btn-outline{
+
+    padding:16px 36px;
+
+    border:2px solid #fff;
+
+    border-radius:50px;
+
+    background:transparent;
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+}
+
+.btn-outline:hover{
+
+    background:#fff;
+
+    color:#0B2C4D;
+
+    transform:translateY(-5px);
+
+}
+
+/*==========================================
+        RESPONSIVE
+==========================================*/
+
+@media(max-width:991px){
+
+.services-hero{
+
+padding:150px 0 90px;
+
+}
+
+.services-hero h1{
+
+font-size:44px;
+
+}
+
+.services-hero p{
+
+font-size:18px;
+
+line-height:32px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.services-hero h1{
+
+font-size:34px;
+
+}
+
+.services-hero p{
+
+font-size:16px;
+
+line-height:28px;
+
+}
+
+.hero-btns{
+
+flex-direction:column;
+
+align-items:center;
+
+}
+
+.btn-primary,
+.btn-outline{
+
+width:260px;
+
+}
+
+}
+.services-hero{
+
+    margin-top:90px;
+
+}

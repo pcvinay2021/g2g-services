@@ -1,0 +1,130 @@
+warning: in the working copy of 'client/src/pages/AdminDashboard.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'client/src/pages/Contact.jsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'client/src/pages/DailyPoster.jsx', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/client/src/components/CTA/CTA.jsx b/client/src/components/CTA/CTA.jsx[m
+[1mindex a59c995..7c199c4 100644[m
+[1m--- a/client/src/components/CTA/CTA.jsx[m
+[1m+++ b/client/src/components/CTA/CTA.jsx[m
+[36m@@ -47,12 +47,12 @@[m [mfunction CTA() {[m
+ [m
+ [m
+           <a[m
+[31m-            href="tel:+917080010039"[m
+[32m+[m[32m            href="tel:+919235018121"[m
+             className="g2g-cta-phone"[m
+           >[m
+             <FaPhoneAlt />[m
+ [m
+[31m-            +91 70800 10039[m
+[32m+[m[32m            +91 92350 18121[m
+           </a>[m
+ [m
+         </div>[m
+[1mdiff --git a/client/src/components/Footer/Footer.jsx b/client/src/components/Footer/Footer.jsx[m
+[1mindex 2b0a990..1dae1f6 100644[m
+[1m--- a/client/src/components/Footer/Footer.jsx[m
+[1m+++ b/client/src/components/Footer/Footer.jsx[m
+[36m@@ -295,12 +295,12 @@[m [mfunction Footer() {[m
+             </h3>[m
+ [m
+ [m
+[31m-            <a href="tel:+917080010039">[m
+[32m+[m[32m            <a href="tel:+919235018121">[m
+ [m
+               <FaPhone />[m
+ [m
+               <span>[m
+[31m-                +91 70800 10039[m
+[32m+[m[32m                +91 92350 18121[m
+               </span>[m
+ [m
+             </a>[m
+[36m@@ -397,7 +397,7 @@[m [mfunction Footer() {[m
+ [m
+ [m
+             <a[m
+[31m-              href="https://wa.me/917080010039"[m
+[32m+[m[32m              href="https://wa.me/919235018121"[m
+               aria-label="WhatsApp"[m
+               target="_blank"[m
+               rel="noopener noreferrer"[m
+[36m@@ -446,7 +446,7 @@[m [mfunction Footer() {[m
+       ================================================== */}[m
+ [m
+       <a[m
+[31m-        href="https://wa.me/917080010039"[m
+[32m+[m[32m        href="https://wa.me/919235018121"[m
+         className={`footer-whatsapp ${[m
+           dragging[m
+             ? "is-dragging"[m
+[1mdiff --git a/client/src/pages/AdminDashboard.jsx b/client/src/pages/AdminDashboard.jsx[m
+[1mindex cbd007b..1c005cd 100644[m
+[1m--- a/client/src/pages/AdminDashboard.jsx[m
+[1m+++ b/client/src/pages/AdminDashboard.jsx[m
+[36m@@ -1063,7 +1063,7 @@[m [mfunction AdminDashboard() {[m
+               </span>[m
+ [m
+               <strong>[m
+[31m-                +91 70800 10039[m
+[32m+[m[32m                +91 92350 18121[m
+               </strong>[m
+ [m
+               <small>[m
+[1mdiff --git a/client/src/pages/Contact.jsx b/client/src/pages/Contact.jsx[m
+[1mindex 28bc614..99b4320 100644[m
+[1m--- a/client/src/pages/Contact.jsx[m
+[1m+++ b/client/src/pages/Contact.jsx[m
+[36m@@ -1,4 +1,4 @@[m
+[31m-import { useState } from "react";[m
+[32m+[m[32m﻿import { useState } from "react";[m
+ import "./Contact.css";[m
+ import { apiUrl } from "../config/api";[m
+ [m
+[36m@@ -134,7 +134,7 @@[m [mfunction Contact() {[m
+             </p>[m
+ [m
+             <a[m
+[31m-              href="https://wa.me/917080010039"[m
+[32m+[m[32m              href="https://wa.me/919235018121"[m
+               target="_blank"[m
+               rel="noreferrer"[m
+             >[m
+[36m@@ -177,9 +177,9 @@[m [mfunction Contact() {[m
+ [m
+               <span>CALL US</span>[m
+ [m
+[31m-              <h3>+91 70800 10039</h3>[m
+[32m+[m[32m              <h3>+91 92350 18121</h3>[m
+ [m
+[31m-              <a href="tel:+917080010039">[m
+[32m+[m[32m              <a href="tel:+919235018121">[m
+                 Call Now[m
+                 <FaArrowRight />[m
+               </a>[m
+[36m@@ -431,7 +431,7 @@[m [mfunction Contact() {[m
+           </div>[m
+ [m
+           <a[m
+[31m-            href="https://wa.me/917080010039"[m
+[32m+[m[32m            href="https://wa.me/919235018121"[m
+             target="_blank"[m
+             rel="noreferrer"[m
+           >[m
+[36m@@ -448,3 +448,4 @@[m [mfunction Contact() {[m
+ }[m
+ [m
+ export default Contact;[m
+[41m+[m
+[1mdiff --git a/client/src/pages/DailyPoster.jsx b/client/src/pages/DailyPoster.jsx[m
+[1mindex ed72c40..4beb312 100644[m
+[1m--- a/client/src/pages/DailyPoster.jsx[m
+[1m+++ b/client/src/pages/DailyPoster.jsx[m
+[36m@@ -6,7 +6,7 @@[m [mimport "./DailyPoster.css";[m
+ const G2G_PROFILE = Object.freeze({[m
+   company: "G2G SERVICES",[m
+   tagline: "Connecting Solutions, Delivering Excellence",[m
+[31m-  phone: "+91 70800 10039",[m
+[32m+[m[32m  phone: "+91 92350 18121",[m
+   email: "info@g2gservices.in",[m
+   website: "www.g2gservices.in",[m
+   location: "India",[m

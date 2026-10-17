@@ -1063,7 +1063,7 @@ function AdminDashboard() {
               </span>
 
               <strong>
-                +91 70800 10039
+                +91 92350 18121
               </strong>
 
               <small>

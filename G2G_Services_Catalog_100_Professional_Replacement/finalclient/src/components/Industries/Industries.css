@@ -1,0 +1,225 @@
+/* =========================================
+   G2G INDUSTRIES
+========================================= */
+
+.g2g-industries {
+  padding: 85px 0;
+
+  background: #ffffff;
+}
+
+.g2g-industries-container {
+  width: 90%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.g2g-industries-heading {
+  display: grid;
+
+  grid-template-columns: 1fr 0.8fr;
+
+  gap: 80px;
+
+  align-items: end;
+
+  margin-bottom: 48px;
+}
+
+.g2g-industries-heading h2 {
+  margin: 0;
+
+  color: #062f3d;
+
+  font-size: clamp(34px, 4vw, 48px);
+
+  line-height: 1.1;
+
+  letter-spacing: -1px;
+}
+
+.g2g-industries-heading h2 span {
+  color: #00a99d;
+}
+
+.g2g-industries-heading > p {
+  max-width: 420px;
+
+  margin: 0;
+
+  color: #687a80;
+
+  font-size: 14px;
+
+  line-height: 1.75;
+}
+
+
+/* =========================================
+   GRID
+========================================= */
+
+.g2g-industries-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  border-top: 1px solid #dce7e9;
+  border-left: 1px solid #dce7e9;
+}
+
+
+/* =========================================
+   ITEM
+========================================= */
+
+.g2g-industry {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: 45px 1fr 20px;
+
+  gap: 17px;
+
+  align-items: start;
+
+  padding: 30px 25px;
+
+  border-right: 1px solid #dce7e9;
+  border-bottom: 1px solid #dce7e9;
+
+  transition:
+    background 0.25s ease;
+}
+
+.g2g-industry:hover {
+  background: #f5fafb;
+}
+
+
+/* =========================================
+   ICON
+========================================= */
+
+.g2g-industry-icon {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 4px;
+
+  background: #e8f7f6;
+
+  color: #00a99d;
+
+  font-size: 16px;
+}
+
+
+/* =========================================
+   TEXT
+========================================= */
+
+.g2g-industry h3 {
+  margin: 1px 0 7px;
+
+  color: #073846;
+
+  font-size: 16px;
+
+  font-weight: 800;
+}
+
+.g2g-industry p {
+  margin: 0;
+
+  color: #718187;
+
+  font-size: 12px;
+
+  line-height: 1.65;
+}
+
+
+/* =========================================
+   ARROW
+========================================= */
+
+.g2g-industry-arrow {
+  color: #00a99d;
+
+  font-size: 18px;
+
+  transition:
+    transform 0.25s ease;
+}
+
+.g2g-industry:hover
+.g2g-industry-arrow {
+  transform: translateX(4px);
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 850px) {
+
+  .g2g-industries {
+    padding: 65px 0;
+  }
+
+  .g2g-industries-heading {
+    grid-template-columns: 1fr;
+
+    gap: 20px;
+  }
+
+  .g2g-industries-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 560px) {
+
+  .g2g-industries {
+    padding: 55px 0;
+  }
+
+  .g2g-industries-container {
+    width: 92%;
+  }
+
+  .g2g-industries-heading h2 {
+    font-size: 34px;
+  }
+
+  .g2g-industries-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .g2g-industry {
+    padding: 24px 20px;
+  }
+
+}

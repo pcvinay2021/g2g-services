@@ -113,7 +113,7 @@ function ServiceCTA() {
 
               <h3>Talk With Our Expert</h3>
 
-              <a href="tel:+917080010039" className="call-btn">
+              <a href="tel:+919235018121" className="call-btn">
                 <FaPhoneAlt />
                 Call Now
               </a>

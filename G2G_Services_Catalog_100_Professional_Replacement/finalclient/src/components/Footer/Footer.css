@@ -1,0 +1,642 @@
+/* =========================================================
+   G2G SERVICES FOOTER
+========================================================= */
+
+.g2g-footer {
+  position: relative;
+
+  width: 100%;
+
+  background: #063541;
+
+  color: #ffffff;
+}
+
+
+/* =========================================================
+   MAIN FOOTER
+========================================================= */
+
+.footer-main {
+  padding: 38px 0 25px;
+
+  background: #063541;
+}
+
+
+.footer-container {
+  width: min(1280px, 92%);
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   FOOTER GRID
+========================================================= */
+
+.footer-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    1.45fr
+    1.15fr
+    1.15fr
+    1fr;
+
+  gap: 40px;
+
+  align-items: start;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.footer-brand {
+  min-width: 0;
+}
+
+
+.footer-logo {
+  display: inline-flex;
+
+  align-items: center;
+
+  margin-bottom: 14px;
+
+  text-decoration: none;
+}
+
+
+.footer-logo img {
+
+  display: block;
+
+  width: 310px;
+
+  max-width: 100%;
+
+  height: auto;
+
+  object-fit: contain;
+
+  transition:
+    transform 0.25s ease;
+}
+
+
+.footer-logo img:hover {
+  transform: scale(1.03);
+}
+
+
+.footer-brand p {
+
+  max-width: 330px;
+
+  margin: 0;
+
+  color: #a9c5cb;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   COLUMN HEADINGS
+========================================================= */
+
+.footer-column h3,
+.footer-contact h3 {
+
+  margin: 3px 0 15px;
+
+  color: #ffffff;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  line-height: 1.3;
+}
+
+
+/* =========================================================
+   LINK COLUMNS
+========================================================= */
+
+.footer-link-columns {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  gap: 20px;
+}
+
+
+.footer-link-columns > div {
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+
+.footer-link-columns a {
+
+  color: #a9c5cb;
+
+  font-size: 13px;
+
+  line-height: 1.35;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.footer-link-columns a:hover {
+
+  color: #00aaa6;
+
+  transform: translateX(3px);
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.footer-contact {
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+.footer-contact a {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  margin-bottom: 11px;
+
+  color: #a9c5cb;
+
+  font-size: 13px;
+
+  line-height: 1.4;
+
+  text-decoration: none;
+
+  transition:
+    color 0.2s ease;
+}
+
+
+.footer-contact a svg {
+
+  flex-shrink: 0;
+
+  color: #00aaa6;
+
+  font-size: 14px;
+}
+
+
+.footer-contact a:hover {
+  color: #ffffff;
+}
+
+
+.footer-location-icon {
+
+  width: 14px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #00aaa6;
+
+  font-size: 11px;
+}
+
+
+/* =========================================================
+   COPYRIGHT BOTTOM ROW
+========================================================= */
+
+.footer-bottom {
+
+  width: 100%;
+
+  background: #052f39;
+
+  border-top:
+    1px solid
+    rgba(255, 255, 255, 0.10);
+}
+
+
+.footer-bottom-inner {
+
+  min-height: 62px;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1fr
+    1fr;
+
+  align-items: center;
+
+  gap: 20px;
+}
+
+
+/* =========================================================
+   SOCIAL ICONS — LEFT
+========================================================= */
+
+.footer-bottom-social {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-start;
+
+  gap: 8px;
+}
+
+
+.footer-bottom-social a {
+
+  width: 32px;
+
+  height: 32px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 6px;
+
+  background: #123f52;
+
+  color: #a9c5cb;
+
+  font-size: 14px;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.footer-bottom-social a:hover {
+
+  background: #00aaa6;
+
+  color: #ffffff;
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   COPYRIGHT — CENTER
+========================================================= */
+
+.footer-copyright {
+
+  text-align: center;
+
+  color: #8eafb6;
+
+  font-size: 12px;
+
+  line-height: 1.4;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   LEGAL LINKS — RIGHT
+========================================================= */
+
+.footer-legal {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 20px;
+}
+
+
+.footer-legal a {
+
+  color: #8eafb6;
+
+  font-size: 12px;
+
+  line-height: 1.4;
+
+  text-decoration: none;
+
+  white-space: nowrap;
+
+  transition:
+    color 0.2s ease;
+}
+
+
+.footer-legal a:hover {
+  color: #00aaa6;
+}
+
+
+/* =========================================================
+   FLOATING WHATSAPP
+========================================================= */
+
+.footer-whatsapp {
+
+  position: fixed;
+
+  right: 24px;
+
+  width: 58px;
+
+  height: 58px;
+
+  z-index: 9999;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #20c76a;
+
+  color: #ffffff;
+
+  font-size: 28px;
+
+  text-decoration: none;
+
+  box-shadow:
+    0 8px 25px
+    rgba(0, 0, 0, 0.25);
+
+  cursor: grab;
+
+  user-select: none;
+
+  -webkit-user-select: none;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.footer-whatsapp:hover {
+
+  transform: scale(1.08);
+
+  box-shadow:
+    0 10px 30px
+    rgba(0, 0, 0, 0.30);
+}
+
+
+.footer-whatsapp.is-dragging {
+
+  cursor: grabbing;
+
+  transform: scale(1.05);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1000px) {
+
+  .footer-grid {
+
+    grid-template-columns:
+      1fr
+      1fr;
+
+    gap: 32px;
+  }
+
+
+  .footer-brand {
+
+    grid-column:
+      1 / -1;
+  }
+
+
+  .footer-brand p {
+    max-width: 500px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .footer-main {
+
+    padding: 30px 0 22px;
+  }
+
+
+  .footer-grid {
+
+    grid-template-columns: 1fr;
+
+    gap: 26px;
+  }
+
+
+  .footer-brand {
+
+    grid-column: auto;
+  }
+
+
+  .footer-logo img {
+
+    width: 200px;
+  }
+
+
+  .footer-brand p {
+
+    font-size: 13px;
+
+    max-width: 100%;
+  }
+
+
+  .footer-link-columns {
+
+    gap: 25px;
+  }
+
+
+  /* ==========================================
+     BOTTOM ROW MOBILE
+  ========================================== */
+
+  .footer-bottom-inner {
+
+    min-height: auto;
+
+    padding-top: 14px;
+
+    padding-bottom: 14px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+  }
+
+
+  .footer-bottom-social {
+
+    justify-content: center;
+
+    order: 1;
+  }
+
+
+  .footer-copyright {
+
+    order: 2;
+
+    white-space: normal;
+
+    text-align: center;
+
+    font-size: 11px;
+  }
+
+
+  .footer-legal {
+
+    order: 3;
+
+    justify-content: center;
+
+    gap: 15px;
+
+    flex-wrap: wrap;
+  }
+
+
+  .footer-legal a {
+
+    font-size: 11px;
+  }
+
+
+  /* ==========================================
+     WHATSAPP
+  ========================================== */
+
+  .footer-whatsapp {
+
+    right: 16px;
+
+    width: 54px;
+
+    height: 54px;
+
+    font-size: 25px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .footer-link-columns {
+
+    grid-template-columns: 1fr;
+  }
+
+
+  .footer-bottom-social a {
+
+    width: 30px;
+
+    height: 30px;
+
+    font-size: 13px;
+  }
+
+
+  .footer-whatsapp {
+
+    right: 12px;
+
+    width: 52px;
+
+    height: 52px;
+  }
+
+}

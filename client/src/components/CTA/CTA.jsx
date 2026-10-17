@@ -47,12 +47,12 @@ function CTA() {
 
 
           <a
-            href="tel:+917080010039"
+            href="tel:+919235018121"
             className="g2g-cta-phone"
           >
             <FaPhoneAlt />
 
-            +91 70800 10039
+            +91 92350 18121
           </a>
 
         </div>

@@ -6,7 +6,7 @@ import "./DailyPoster.css";
 const G2G_PROFILE = Object.freeze({
   company: "G2G SERVICES",
   tagline: "Connecting Solutions, Delivering Excellence",
-  phone: "+91 70800 10039",
+  phone: "+91 92350 18121",
   email: "info@g2gservices.in",
   website: "www.g2gservices.in",
   location: "India",

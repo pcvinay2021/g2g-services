@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import "./Contact.css";
 import { apiUrl } from "../config/api";
 
@@ -134,7 +134,7 @@ function Contact() {
             </p>
 
             <a
-              href="https://wa.me/917080010039"
+              href="https://wa.me/919235018121"
               target="_blank"
               rel="noreferrer"
             >
@@ -177,9 +177,9 @@ function Contact() {
 
               <span>CALL US</span>
 
-              <h3>+91 70800 10039</h3>
+              <h3>+91 92350 18121</h3>
 
-              <a href="tel:+917080010039">
+              <a href="tel:+919235018121">
                 Call Now
                 <FaArrowRight />
               </a>
@@ -431,7 +431,7 @@ function Contact() {
           </div>
 
           <a
-            href="https://wa.me/917080010039"
+            href="https://wa.me/919235018121"
             target="_blank"
             rel="noreferrer"
           >
@@ -448,3 +448,4 @@ function Contact() {
 }
 
 export default Contact;
+

@@ -168,7 +168,7 @@ function ProductDetail({ product }) {
               {/* CALL */}
 
               <a
-                href="tel:+917080010039"
+                href="tel:+919235018121"
                 className="product-call-btn"
               >
 
@@ -182,7 +182,7 @@ function ProductDetail({ product }) {
               {/* WHATSAPP */}
 
               <a
-                href="https://wa.me/917080010039"
+                href="https://wa.me/919235018121"
                 target="_blank"
                 rel="noreferrer"
                 className="product-whatsapp-btn"
@@ -372,7 +372,7 @@ function ProductDetail({ product }) {
 
 
             <a
-              href="https://wa.me/917080010039"
+              href="https://wa.me/919235018121"
               target="_blank"
               rel="noreferrer"
               className="banner-whatsapp-btn"

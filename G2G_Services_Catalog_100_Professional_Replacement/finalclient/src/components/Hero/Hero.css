@@ -1,0 +1,333 @@
+/* ================================
+   G2G HERO - CORPORATE STYLE
+================================ */
+
+.g2g-hero {
+  position: relative;
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #f4f8f9;
+}
+
+.g2g-hero::after {
+  content: "";
+  position: absolute;
+  right: -180px;
+  top: -180px;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 196, 179, 0.18);
+}
+
+.g2g-hero-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 60px;
+
+  position: relative;
+  z-index: 2;
+}
+
+.g2g-hero-content {
+  max-width: 620px;
+}
+
+.g2g-hero-label {
+  display: inline-block;
+
+  margin-bottom: 18px;
+
+  color: #00a99d;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.g2g-hero-content h1 {
+  margin: 0;
+
+  color: #062f3d;
+
+  font-size: clamp(42px, 5vw, 64px);
+
+  line-height: 1.05;
+
+  font-weight: 800;
+
+  letter-spacing: -1.5px;
+}
+
+.g2g-hero-content h1 span {
+  color: #00a99d;
+}
+
+.g2g-hero-content p {
+  max-width: 570px;
+
+  margin: 24px 0 30px;
+
+  color: #52666d;
+
+  font-size: 16px;
+
+  line-height: 1.75;
+}
+
+.g2g-hero-buttons {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.g2g-hero-primary,
+.g2g-hero-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 44px;
+
+  padding: 0 22px;
+
+  border-radius: 5px;
+
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 800;
+
+  transition: all 0.25s ease;
+}
+
+.g2g-hero-primary {
+  background: #00b8aa;
+  color: #ffffff;
+}
+
+.g2g-hero-primary:hover {
+  background: #008f87;
+  transform: translateY(-2px);
+}
+
+.g2g-hero-secondary {
+  border: 1px solid #c9d9dc;
+
+  background: #ffffff;
+
+  color: #063846;
+}
+
+.g2g-hero-secondary:hover {
+  border-color: #00b8aa;
+  color: #008f87;
+}
+
+
+/* ================================
+   HERO VISUAL
+================================ */
+
+.g2g-hero-visual {
+  position: relative;
+
+  min-height: 390px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.g2g-hero-panel {
+  position: relative;
+
+  width: 100%;
+  max-width: 500px;
+  min-height: 330px;
+
+  overflow: hidden;
+
+  background: #062b3a;
+
+  border-radius: 4px;
+
+  box-shadow: 0 25px 60px rgba(6, 47, 61, 0.18);
+}
+
+.g2g-hero-panel::before {
+  content: "";
+
+  position: absolute;
+
+  width: 260px;
+  height: 260px;
+
+  right: -70px;
+  top: -80px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(0, 196, 179, 0.35);
+}
+
+.g2g-hero-panel::after {
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  left: -80px;
+  bottom: -90px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.g2g-hero-panel-content {
+  position: relative;
+  z-index: 2;
+
+  padding: 45px;
+}
+
+.g2g-hero-panel-content small {
+  color: #00c4b3;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 1.5px;
+}
+
+.g2g-hero-panel-content h2 {
+  max-width: 360px;
+
+  margin: 16px 0;
+
+  color: #ffffff;
+
+  font-size: 34px;
+  line-height: 1.15;
+}
+
+.g2g-hero-panel-content p {
+  max-width: 350px;
+
+  margin: 0;
+
+  color: #b8c9ce;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+
+/* ================================
+   TECH POINTS
+================================ */
+
+.g2g-hero-points {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 10px;
+
+  margin-top: 30px;
+
+  max-width: 380px;
+}
+
+.g2g-hero-point {
+  padding: 13px;
+
+  border-left: 2px solid #00c4b3;
+
+  background: rgba(255, 255, 255, 0.05);
+
+  color: #d5e2e5;
+
+  font-size: 12px;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 850px) {
+
+  .g2g-hero {
+    min-height: auto;
+
+    padding: 70px 0;
+  }
+
+  .g2g-hero-container {
+    grid-template-columns: 1fr;
+
+    gap: 45px;
+  }
+
+  .g2g-hero-content h1 {
+    font-size: 44px;
+  }
+
+  .g2g-hero-visual {
+    min-height: 330px;
+  }
+
+}
+
+
+@media (max-width: 520px) {
+
+  .g2g-hero {
+    padding: 55px 0;
+  }
+
+  .g2g-hero-container {
+    width: 92%;
+  }
+
+  .g2g-hero-content h1 {
+    font-size: 37px;
+  }
+
+  .g2g-hero-content p {
+    font-size: 14px;
+  }
+
+  .g2g-hero-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .g2g-hero-primary,
+  .g2g-hero-secondary {
+    width: 100%;
+  }
+
+  .g2g-hero-panel-content {
+    padding: 30px;
+  }
+
+  .g2g-hero-panel-content h2 {
+    font-size: 28px;
+  }
+
+}

@@ -1,0 +1,292 @@
+/* =========================================
+   G2G PRODUCT SHOWCASE
+========================================= */
+
+.g2g-showcase {
+  width: 100%;
+  padding: 28px 0 32px;
+  background: #ffffff;
+  overflow: hidden;
+  border-bottom: 1px solid #dfe9eb;
+}
+
+
+/* =========================================
+   HEADING
+========================================= */
+
+.g2g-showcase-heading {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+}
+
+.g2g-showcase-heading span {
+  color: #00a99d;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+.g2g-showcase-heading strong {
+  color: #536a70;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.g2g-showcase-heading strong b {
+  color: #063846;
+  font-weight: 800;
+}
+
+
+/* =========================================
+   MOVING TRACK
+========================================= */
+
+.g2g-showcase-track {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+
+  mask-image:
+    linear-gradient(
+      to right,
+      transparent 0%,
+      black 4%,
+      black 96%,
+      transparent 100%
+    );
+}
+
+
+/* =========================================
+   MOVING CONTENT
+========================================= */
+
+.g2g-showcase-move {
+  display: flex;
+  width: max-content;
+
+  gap: 22px;
+
+  will-change: transform;
+
+  animation:
+    g2gProductMove 48s linear infinite;
+}
+
+
+/* =========================================
+   LARGE PRODUCT CARD
+========================================= */
+
+.g2g-showcase-card {
+  width: 360px;
+  height: 135px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 24px;
+
+  padding: 14px 22px;
+
+  background: #f6fafb;
+
+  border: 1px solid #d6e4e7;
+
+  border-radius: 7px;
+
+  box-sizing: border-box;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.g2g-showcase-card:hover {
+  background: #ffffff;
+
+  border-color: #8fcfc9;
+
+  box-shadow:
+    0 10px 30px rgba(6, 56, 70, 0.10);
+}
+
+
+/* =========================================
+   LARGE PRODUCT IMAGE
+========================================= */
+
+.g2g-showcase-image {
+  width: 125px;
+  height: 105px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+.g2g-showcase-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  display: block;
+}
+
+
+/* =========================================
+   PRODUCT INFORMATION
+========================================= */
+
+.g2g-showcase-info {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.g2g-showcase-info small {
+  color: #00a99d;
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.1px;
+
+  text-transform: uppercase;
+}
+
+.g2g-showcase-info span {
+  color: #063846;
+
+  font-size: 18px;
+
+  font-weight: 800;
+
+  line-height: 1.25;
+}
+
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+@keyframes g2gProductMove {
+
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-33.3333%);
+  }
+
+}
+
+
+/* =========================================
+   PAUSE ON HOVER
+========================================= */
+
+.g2g-showcase-track:hover
+.g2g-showcase-move {
+  animation-play-state: paused;
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+  .g2g-showcase-card {
+    width: 320px;
+    height: 120px;
+  }
+
+  .g2g-showcase-image {
+    width: 110px;
+    height: 95px;
+  }
+
+  .g2g-showcase-info span {
+    font-size: 16px;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 650px) {
+
+  .g2g-showcase {
+    padding: 22px 0 26px;
+  }
+
+  .g2g-showcase-heading {
+    width: 92%;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 7px;
+
+    margin-bottom: 16px;
+  }
+
+  .g2g-showcase-heading span {
+    font-size: 12px;
+  }
+
+  .g2g-showcase-heading strong {
+    font-size: 13px;
+  }
+
+  .g2g-showcase-card {
+    width: 285px;
+    height: 105px;
+
+    gap: 16px;
+
+    padding: 10px 16px;
+  }
+
+  .g2g-showcase-image {
+    width: 90px;
+    height: 82px;
+  }
+
+  .g2g-showcase-info small {
+    font-size: 10px;
+  }
+
+  .g2g-showcase-info span {
+    font-size: 14px;
+  }
+
+}

@@ -295,12 +295,12 @@ function Footer() {
             </h3>
 
 
-            <a href="tel:+917080010039">
+            <a href="tel:+919235018121">
 
               <FaPhone />
 
               <span>
-                +91 70800 10039
+                +91 92350 18121
               </span>
 
             </a>
@@ -397,7 +397,7 @@ function Footer() {
 
 
             <a
-              href="https://wa.me/917080010039"
+              href="https://wa.me/919235018121"
               aria-label="WhatsApp"
               target="_blank"
               rel="noopener noreferrer"
@@ -446,7 +446,7 @@ function Footer() {
       ================================================== */}
 
       <a
-        href="https://wa.me/917080010039"
+        href="https://wa.me/919235018121"
         className={`footer-whatsapp ${
           dragging
             ? "is-dragging"

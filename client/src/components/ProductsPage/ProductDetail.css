@@ -886,3 +886,4 @@
     }
 
 }
+.product-detail-placeholder{min-height:260px;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;background:linear-gradient(145deg,#eef8f7,#dcebea);color:#668e90}.product-detail-placeholder span{font-size:42px;font-weight:900;letter-spacing:3px;color:#00a995}.product-detail-placeholder small{font-size:12px}.product-detail-pricing{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 0 18px}.product-detail-pricing strong{font-size:28px;color:#087f6c}.product-detail-pricing del{color:#839296}.product-detail-pricing b{background:#e4f8ef;color:#087653;border-radius:5px;padding:5px 8px;font-size:12px}

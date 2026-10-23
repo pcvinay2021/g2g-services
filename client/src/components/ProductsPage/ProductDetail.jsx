@@ -10,6 +10,8 @@ import {
 } from "react-icons/fa";
 
 import { Link } from "react-router-dom";
+import { apiUrl } from "../../config/api";
+const mediaUrl = (value) => value && String(value).startsWith("/") ? apiUrl(value) : value;
 
 function ProductDetail({ product }) {
 
@@ -67,10 +69,7 @@ function ProductDetail({ product }) {
 
             <div className="product-image-box">
 
-              <img
-                src={product.image}
-                alt={product.name}
-              />
+              {product.image ? <img src={mediaUrl(product.image)} alt={product.name} onError={e => { e.currentTarget.style.display = "none"; }} /> : <div className="product-detail-placeholder"><span>G2G</span><small>Product image coming soon</small></div>}
 
             </div>
 
@@ -122,6 +121,14 @@ function ProductDetail({ product }) {
               {product.name}
 
             </h1>
+
+            {(product.mrp != null || product.sellingPrice != null) && (
+              <div className="product-detail-pricing">
+                {product.sellingPrice != null && <strong>₹{Number(product.sellingPrice).toLocaleString("en-IN")}</strong>}
+                {product.mrp != null && product.sellingPrice != null && Number(product.mrp) > Number(product.sellingPrice) && <><del>₹{Number(product.mrp).toLocaleString("en-IN")}</del><b>{Math.round((Number(product.mrp) - Number(product.sellingPrice)) / Number(product.mrp) * 100)}% OFF</b></>}
+                {product.sellingPrice == null && product.mrp != null && <span>MRP ₹{Number(product.mrp).toLocaleString("en-IN")}</span>}
+              </div>
+            )}
 
 
             {/* DESCRIPTION */}
@@ -220,10 +227,10 @@ function ProductDetail({ product }) {
 
               {/* DATASHEET */}
 
-              {product.datasheetUrl || product.datasheet ? (
+              {product.catalogPdf || product.datasheetUrl || product.datasheet ? (
 
                 <a
-                  href={product.datasheetUrl || product.datasheet}
+                  href={mediaUrl(product.catalogPdf || product.datasheetUrl || product.datasheet)}
                   target="_blank"
                   rel="noreferrer"
                   className="product-inquiry-btn"

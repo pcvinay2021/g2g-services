@@ -12,8 +12,10 @@ import Careers from "./pages/Careers";
 import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
 import ProductDetailPage from "./pages/ProductDetailPage";
+import ProductCategoryPage from "./pages/ProductCategoryPage";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminProducts from "./pages/AdminProducts";
 import DailyPoster from "./pages/DailyPoster";
 import ContactEnquiries from "./pages/ContactEnquiries";
 import CareerApplications from "./pages/CareerApplications";
@@ -37,6 +39,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/products/category/:slug" element={<ProductCategoryPage />} />
           <Route path="/products/:id" element={<ProductDetailPage />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/careers" element={<Careers />} />
@@ -47,6 +50,7 @@ function App() {
 
           <Route element={<AdminRoute />}>
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/products" element={<AdminProducts />} />
             <Route path="/admin/daily-poster" element={<DailyPoster />} />
             <Route path="/admin/contacts" element={<ContactEnquiries />} />
             <Route path="/admin/careers" element={<CareerApplications />} />

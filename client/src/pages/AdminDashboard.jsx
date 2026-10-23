@@ -371,6 +371,13 @@ function AdminDashboard() {
           </button>
 
           <button
+            onClick={() => goTo("/admin/products")}
+          >
+            <span className="nav-icon">▣</span>
+            Product Management
+          </button>
+
+          <button
             onClick={() =>
               goTo("/admin/contacts")
             }

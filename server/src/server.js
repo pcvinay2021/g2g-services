@@ -15,6 +15,8 @@ const contactRoutes = require("./routes/contactRoutes");
 const careerRoutes = require("./routes/careerRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 const adminCareerRoutes = require("./routes/adminCareerRoutes");
+const productBulkRoutes = require("./routes/productBulkRoutes");
+const productRoutes = require("./routes/productRoutes");
 
 // Mobile application routes
 const mobileAuthRoutes = require("./routes/mobileAuthRoutes");
@@ -96,6 +98,8 @@ app.use("/api/contact", contactRoutes);
 app.use("/api/careers", careerRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/admin/careers", adminCareerRoutes);
+app.use("/api/products", productBulkRoutes);
+app.use("/api/products", productRoutes);
 
 // Mobile application APIs
 app.use("/api/mobile/auth", mobileAuthRoutes);
@@ -114,8 +118,12 @@ app.use((error, req, res, next) => {
   if (error.code === "LIMIT_FILE_SIZE") {
     return res.status(400).json({
       success: false,
-      message: "File size must be 5 MB or less.",
+      message: req.path?.includes("/api/products/bulk") ? "Each bulk upload file must be 30 MB or less." : "File size must be 5 MB or less.",
     });
+  }
+
+  if (error.message?.includes("Excel/CSV file aur images/catalogs")) {
+    return res.status(400).json({ success: false, message: error.message });
   }
 
   if (error.message?.includes("Only PDF, DOC and DOCX")) {

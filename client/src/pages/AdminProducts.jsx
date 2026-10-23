@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiUrl } from "../config/api";
 import ProductBulkImport from "../components/ProductBulkImport";
@@ -6,7 +6,7 @@ import { FaBoxOpen, FaEdit, FaPlus, FaTrash, FaSyncAlt } from "react-icons/fa";
 import "./AdminProducts.css";
 
 const blank = { name: "", sku: "", brand: "", model: "", category: "CCTV Surveillance", description: "", image: "", catalogPdf: "", mrp: "", sellingPrice: "", isPublished: true };
-const money = value => value == null || value === "" ? "—" : `₹${Number(value).toLocaleString("en-IN")}`;
+const money = value => value == null || value === "" ? "â€”" : `â‚¹${Number(value).toLocaleString("en-IN")}`;
 
 export default function AdminProducts() {
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ export default function AdminProducts() {
     finally { setSaving(false); }
   }
   async function remove(item) {
-    if (!window.confirm(`“${item.name}” ko permanently delete karna hai?`)) return;
+    if (!window.confirm(`â€œ${item.name}â€ ko permanently delete karna hai?`)) return;
     setError(""); setNotice("");
     try {
       const response = await fetch(apiUrl(`/api/products/${item._id}`), { method: "DELETE", headers: { Authorization: `Bearer ${token}` } });
@@ -64,7 +64,7 @@ export default function AdminProducts() {
   }
 
   return <section className="admin-products-page">
-    <header className="admin-products-head"><div><span>G2G SERVICES · INVENTORY</span><h1>Product Management</h1><p>Yahin se products, prices aur customer-facing discounts manage karein.</p></div><button className="ap-refresh" onClick={load} disabled={loading}><FaSyncAlt /> Refresh</button></header>
+    <header className="admin-products-head"><div><span>G2G SERVICES Â· INVENTORY</span><h1>Product Management</h1><p>Yahin se products, prices aur customer-facing discounts manage karein.</p></div><button type="button" onClick={() => navigate("/admin/dashboard")} style={{padding:"10px 14px",borderRadius:"8px",border:"1px solid #d1d5db",background:"#fff",cursor:"pointer",fontWeight:600,marginRight:"10px"}}>← Back to Dashboard</button><button className="ap-refresh" onClick={load} disabled={loading}><FaSyncAlt /> Refresh</button></header>
     {error && <div className="ap-alert ap-error" role="alert">{error}</div>}{notice && <div className="ap-alert ap-success" role="status">{notice}</div>}
     <ProductBulkImport token={token} onImported={load} />
     <form className="ap-form" onSubmit={save}>
@@ -75,16 +75,17 @@ export default function AdminProducts() {
         <label>Brand<input value={form.brand} onChange={e=>update("brand",e.target.value)} placeholder="e.g. CP Plus" /></label>
         <label>Model number<input value={form.model} onChange={e=>update("model",e.target.value)} placeholder="Model / SKU" /></label>
         <label>Category *<select required value={form.category} onChange={e=>update("category",e.target.value)}>{["CCTV Surveillance","Access Control","Biometric","Networking","Fire Alarm","EPABX / Intercom","Power Backup","IT Hardware","Other"].map(x=><option key={x}>{x}</option>)}</select></label>
-        <label>MRP (₹)<input type="number" min="0" step="0.01" value={form.mrp} onChange={e=>update("mrp",e.target.value)} placeholder="Optional" /></label>
-        <label>Selling price (₹)<input type="number" min="0" step="0.01" value={form.sellingPrice} onChange={e=>update("sellingPrice",e.target.value)} placeholder="Optional" /></label>
-        <label className="ap-wide">Product image URL / upload path (optional)<input type="text" value={form.image} onChange={e=>update("image",e.target.value)} placeholder="https://... — blank chhodenge to professional placeholder dikhega" /></label>
+        <label>MRP (â‚¹)<input type="number" min="0" step="0.01" value={form.mrp} onChange={e=>update("mrp",e.target.value)} placeholder="Optional" /></label>
+        <label>Selling price (â‚¹)<input type="number" min="0" step="0.01" value={form.sellingPrice} onChange={e=>update("sellingPrice",e.target.value)} placeholder="Optional" /></label>
+        <label className="ap-wide">Product image URL / upload path (optional)<input type="text" value={form.image} onChange={e=>update("image",e.target.value)} placeholder="https://... â€” blank chhodenge to professional placeholder dikhega" /></label>
         <label className="ap-wide">Official catalog / datasheet PDF URL / upload path (optional)<input type="text" value={form.catalogPdf} onChange={e=>update("catalogPdf",e.target.value)} placeholder="https://... or uploaded PDF path" /></label>
         <label className="ap-wide">Description<textarea rows="3" value={form.description} onChange={e=>update("description",e.target.value)} placeholder="Product ki short details" /></label>
       </div>
       <div className="ap-form-bottom"><div className="ap-discount-preview">{discount > 0 ? <><strong>{discount}% OFF</strong><span>{money(form.mrp)} se {money(form.sellingPrice)}</span></> : <span>Price / discount optional hai</span>}</div><label className="ap-publish"><input type="checkbox" checked={form.isPublished} onChange={e=>update("isPublished",e.target.checked)} /> Website par customers ko dikhayein</label><div className="ap-actions"><button type="button" className="ap-cancel" onClick={resetForm}>Clear</button><button type="submit" className="ap-save" disabled={saving}><FaPlus /> {saving ? "Saving..." : editing ? "Save changes" : "Add product"}</button></div></div>
     </form>
     <section className="ap-inventory"><div className="ap-inventory-head"><div><span>YOUR INVENTORY</span><h2>Products <small>({items.length})</small></h2></div><p>Unpublished products customers ko nahi dikhte.</p></div>
-      {loading ? <p className="ap-empty">Products load ho rahe hain…</p> : items.length === 0 ? <p className="ap-empty">Abhi koi admin-added product nahi hai. Upar form se pehla product add karein.</p> : <div className="ap-table-wrap"><table className="ap-table"><thead><tr><th>Product</th><th>MRP</th><th>Selling price</th><th>Discount</th><th>Visibility</th><th>Actions</th></tr></thead><tbody>{items.map(item=>{const off=item.mrp>0&&item.sellingPrice!=null?Math.max(0,Math.round((item.mrp-item.sellingPrice)/item.mrp*100)):0;return <tr key={item._id}><td><strong>{item.name}</strong><small>{[item.brand,item.model,item.category].filter(Boolean).join(" · ")}</small></td><td>{money(item.mrp)}</td><td>{money(item.sellingPrice)}</td><td>{off>0?<b className="ap-off">{off}% OFF</b>:"—"}</td><td><span className={item.isPublished?"ap-visible":"ap-hidden"}>{item.isPublished?"Published":"Hidden"}</span></td><td><div className="ap-row-actions"><button onClick={()=>startEdit(item)} aria-label="Edit product"><FaEdit /></button><button className="ap-delete" onClick={()=>remove(item)} aria-label="Delete product"><FaTrash /></button></div></td></tr>})}</tbody></table></div>}
+      {loading ? <p className="ap-empty">Products load ho rahe hainâ€¦</p> : items.length === 0 ? <p className="ap-empty">Abhi koi admin-added product nahi hai. Upar form se pehla product add karein.</p> : <div className="ap-table-wrap"><table className="ap-table"><thead><tr><th>Product</th><th>MRP</th><th>Selling price</th><th>Discount</th><th>Visibility</th><th>Actions</th></tr></thead><tbody>{items.map(item=>{const off=item.mrp>0&&item.sellingPrice!=null?Math.max(0,Math.round((item.mrp-item.sellingPrice)/item.mrp*100)):0;return <tr key={item._id}><td><strong>{item.name}</strong><small>{[item.brand,item.model,item.category].filter(Boolean).join(" Â· ")}</small></td><td>{money(item.mrp)}</td><td>{money(item.sellingPrice)}</td><td>{off>0?<b className="ap-off">{off}% OFF</b>:"â€”"}</td><td><span className={item.isPublished?"ap-visible":"ap-hidden"}>{item.isPublished?"Published":"Hidden"}</span></td><td><div className="ap-row-actions"><button onClick={()=>startEdit(item)} aria-label="Edit product"><FaEdit /></button><button className="ap-delete" onClick={()=>remove(item)} aria-label="Delete product"><FaTrash /></button></div></td></tr>})}</tbody></table></div>}
     </section>
   </section>;
 }
+
